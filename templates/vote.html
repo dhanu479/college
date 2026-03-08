@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block title %}Vote · SecureVote{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card bg-black border border-warning rounded-4 shadow-sm">
+      <div class="card-body">
+        <h3 class="card-title animate__animated animate__fadeInDown">Cast Your Vote</h3>
+        <form method="POST" id="voteForm" class="needs-validation" novalidate>
+          <div class="candidates-list">
+            {% for c in candidates %}
+            <div class="form-check my-4 animate__animated animate__fadeInUp" style="animation-delay: {{ loop.index * 0.1 }}s">
+              <input class="form-check-input visually-hidden" type="radio" name="candidate" id="cand{{ c['id'] }}" value="{{ c['id'] }}" required>
+              <label class="form-check-label d-flex align-items-center candidate-card" for="cand{{ c['id'] }}">
+                {% if c['logo'] %}
+                  <div class="candidate-photo-container me-3">
+                    <img src="{{ url_for('uploaded_logo', filename=c['logo']) }}" alt="Candidate photo" class="candidate-photo">
+                  </div>
+                {% endif %}
+                <div class="candidate-info flex-grow-1">
+                  <strong class="candidate-name">{{ c['name'] }}</strong>
+                  <span class="party-name text-warning d-block">{{ c['party'] }}</span>
+                </div>
+              </label>
+            </div>
+            {% endfor %}
+          </div>
+          <button class="btn btn-warning w-100 mt-4 animate__animated animate__fadeInUp" style="animation-delay: 0.5s">
+            <i class="fas fa-vote-yea me-2"></i>Submit Vote
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('voteForm');
+    const radioButtons = form.querySelectorAll('input[type="radio"]');
+    
+    // Add hover effect to candidate labels
+    radioButtons.forEach(radio => {
+        radio.addEventListener('change', function() {
+            // Remove selected class from all labels
+            form.querySelectorAll('.form-check-label').forEach(label => {
+                label.classList.remove('selected');
+            });
+            
+            // Add selected class to checked radio's label
+            if (this.checked) {
+                this.closest('.form-check').querySelector('.form-check-label').classList.add('selected');
+            }
+        });
+    });
+
+    // Form validation
+    form.addEventListener('submit', function(event) {
+        if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+            showFlashMessage('Please select a candidate before submitting', 'warning');
+        }
+        form.classList.add('was-validated');
+    });
+});
+</script>
+{% endblock %}

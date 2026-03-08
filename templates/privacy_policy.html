@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}Privacy Policy - SecureVote{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/feature-sections.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="text-center text-warning mb-5 animate__animated animate__fadeInDown">Privacy Policy</h1>
+    
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="feature-card" data-aos="fade-up">
+                <h2 class="text-warning mb-4">Your Privacy Matters</h2>
+                <p class="text-light">
+                    At SecureVote, we take your privacy seriously. This policy outlines how we collect, use, and protect your personal information.
+                </p>
+
+                <div class="privacy-section mb-4">
+                    <h3 class="text-warning">Information We Collect</h3>
+                    <ul class="feature-list">
+                        <li>Personal identification information (Name, Voter ID, etc.)</li>
+                        <li>Biometric data (Facial recognition templates)</li>
+                        <li>Authentication records</li>
+                        <li>Voting activity logs</li>
+                    </ul>
+                </div>
+
+                <div class="privacy-section mb-4">
+                    <h3 class="text-warning">How We Use Your Information</h3>
+                    <ul class="feature-list">
+                        <li>Verify your identity for secure voting</li>
+                        <li>Prevent fraudulent voting attempts</li>
+                        <li>Maintain voting system integrity</li>
+                        <li>Improve our services and user experience</li>
+                    </ul>
+                </div>
+
+                <div class="privacy-section mb-4">
+                    <h3 class="text-warning">Data Security</h3>
+                    <ul class="feature-list">
+                        <li>End-to-end encryption for all data transmission</li>
+                        <li>Secure storage of biometric templates</li>
+                        <li>Regular security audits and updates</li>
+                        <li>Strict access controls and monitoring</li>
+                    </ul>
+                </div>
+
+                <div class="privacy-section mb-4">
+                    <h3 class="text-warning">Your Rights</h3>
+                    <ul class="feature-list">
+                        <li>Access your personal information</li>
+                        <li>Request data correction or deletion</li>
+                        <li>Opt-out of non-essential data collection</li>
+                        <li>File privacy concerns or complaints</li>
+                    </ul>
+                </div>
+
+                <div class="privacy-section">
+                    <h3 class="text-warning">Contact Us</h3>
+                    <p class="text-light">
+                        For privacy-related inquiries or concerns, please contact our Data Protection Officer:
+                    </p>
+                    <ul class="feature-list">
+                        <li>Email: securevotehelper@gmail.com</li>
+                        <li>Phone: +91 95132 93912</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

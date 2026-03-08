@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block title %}Features - SecureVote{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/feature-sections.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="text-center text-warning mb-5 animate__animated animate__fadeInDown glow-on-hover">SecureVote Features</h1>
+    
+    <!-- Interactive Feature Navigation -->
+    <div class="feature-navigation text-center mb-5 reveal">
+        <div class="btn-group" role="group" aria-label="Feature categories">
+            <button class="btn btn-outline-warning active" data-category="all">All Features</button>
+            <button class="btn btn-outline-warning" data-category="security">Security</button>
+            <button class="btn btn-outline-warning" data-category="authentication">Authentication</button>
+            <button class="btn btn-outline-warning" data-category="user-experience">User Experience</button>
+        </div>
+    </div>
+    
+    <div class="row g-4">
+        <!-- Face Recognition -->
+        <div class="col-md-6" data-aos="fade-right">
+            <div class="feature-card h-100">
+                <div class="feature-icon">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <h3 class="text-warning">Face Recognition</h3>
+                <p class="text-light">
+                    State-of-the-art facial recognition technology ensures that only registered voters can access the system.
+                    Our advanced algorithms provide:
+                </p>
+                <ul class="feature-list">
+                    <li>Real-time face detection and verification</li>
+                    <li>Multiple angle face matching</li>
+                    <li>Anti-spoofing protection</li>
+                    <li>Privacy-preserving processing</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Live Authentication -->
+        <div class="col-md-6" data-aos="fade-left">
+            <div class="feature-card h-100">
+                <div class="feature-icon">
+                    <i class="fas fa-camera"></i>
+                </div>
+                <h3 class="text-warning">Live Authentication</h3>
+                <p class="text-light">
+                    Our liveness detection ensures that only real, present users can participate in voting:
+                </p>
+                <ul class="feature-list">
+                    <li>Motion detection and tracking</li>
+                    <li>Blink detection</li>
+                    <li>Expression analysis</li>
+                    <li>Real-time verification</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Secure Voting -->
+        <div class="col-md-6" data-aos="fade-right" data-aos-delay="100">
+            <div class="feature-card h-100">
+                <div class="feature-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <h3 class="text-warning">Secure Voting</h3>
+                <p class="text-light">
+                    Multi-layered security measures protect the integrity of every vote:
+                </p>
+                <ul class="feature-list">
+                    <li>End-to-end encryption</li>
+                    <li>Blockchain technology for vote tracking</li>
+                    <li>Double-voting prevention</li>
+                    <li>Audit trails and verification</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- User Experience -->
+        <div class="col-md-6" data-aos="fade-left" data-aos-delay="100">
+            <div class="feature-card h-100">
+                <div class="feature-icon">
+                    <i class="fas fa-desktop"></i>
+                </div>
+                <h3 class="text-warning">User Experience</h3>
+                <p class="text-light">
+                    Designed for accessibility and ease of use:
+                </p>
+                <ul class="feature-list">
+                    <li>Intuitive interface</li>
+                    <li>Mobile-responsive design</li>
+                    <li>Step-by-step guidance</li>
+                    <li>24/7 support</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

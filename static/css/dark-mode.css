@@ -1,0 +1,234 @@
+/* Dark Theme Variables */
+:root {
+    --bg-primary: #000000;
+    --bg-secondary: #0a0a0a;
+    --bg-card: rgba(10, 10, 10, 0.95);
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --accent-color: #ffd700;
+    --accent-hover: #ffed4a;
+    --border-color: rgba(255, 215, 0, 0.2);
+}
+
+/* Base styles */
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+/* Glass Container */
+.glass-container {
+    background: var(--bg-primary);
+    min-height: 100vh;
+}
+
+/* Card styles */
+.card, .feature-card, .team-member-card, .content-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Navbar */
+.navbar {
+    background: var(--bg-primary) !important;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: var(--text-secondary);
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: var(--accent-color);
+}
+
+/* Dropdown menus */
+.dropdown-menu {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+}
+
+.dropdown-item {
+    color: var(--text-secondary);
+}
+
+.dropdown-item:hover {
+    background: var(--bg-primary);
+    color: var(--accent-color);
+}
+
+/* Form elements */
+.form-control {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+.form-control:focus {
+    background: var(--bg-secondary);
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.25);
+    color: var(--text-primary);
+}
+
+/* Buttons */
+.btn-warning {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+    color: var(--bg-primary);
+}
+
+.btn-warning:hover {
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
+    color: var(--bg-primary);
+}
+
+.btn-outline-warning {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+}
+
+.btn-outline-warning:hover {
+    background: var(--accent-color);
+    color: var(--bg-primary);
+}
+
+/* Tables */
+.table {
+    color: var(--text-primary);
+    background: var(--bg-card);
+}
+
+.table th {
+    background: var(--bg-secondary);
+    border-color: var(--border-color);
+}
+
+.table td {
+    border-color: var(--border-color);
+}
+
+/* Alerts */
+.alert {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+}
+
+/* Footer */
+footer {
+    background: var(--bg-primary) !important;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-color);
+}
+
+/* Modal */
+.modal-content {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+}
+
+.modal-header {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.modal-footer {
+    border-top: 1px solid var(--border-color);
+}
+
+/* Lists */
+.list-group-item {
+    background: var(--bg-secondary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+/* Progress bars */
+.progress {
+    background: var(--bg-secondary);
+}
+
+/* Card hover effects */
+.feature-card:hover, .team-member-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    border-color: var(--accent-color);
+}
+
+/* Text colors */
+.text-muted {
+    color: var(--text-secondary) !important;
+}
+
+.text-warning {
+    color: var(--accent-color) !important;
+}
+
+/* Background animations */
+#ai-background {
+    opacity: 0.1;
+}
+
+/* Loading overlay */
+#loading-overlay {
+    background: rgba(0, 0, 0, 0.9);
+}
+
+/* Statistics cards */
+.stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+}
+
+/* Login form */
+.login-card {
+    background: var(--bg-card);
+}
+
+/* Hero section */
+.hero-title {
+    color: var(--accent-color);
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+/* Feature sections */
+.feature-item {
+    background: var(--bg-card);
+}
+
+/* Team member cards */
+.team-member-card {
+    background: var(--bg-card);
+}
+
+/* Security features */
+.security-feature i {
+    color: var(--accent-color);
+}
+
+/* Step indicators */
+.step-number {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--accent-color);
+}
+
+/* Social links */
+.social-links a {
+    color: var(--accent-color);
+}

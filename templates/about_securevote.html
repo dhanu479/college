@@ -1,0 +1,187 @@
+{% extends "base.html" %}
+
+{% block title %}About SecureVote{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/about-pages.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/feature-sections.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="text-center text-warning mb-5 animate__animated animate__fadeInDown">About SecureVote</h1>
+    
+    <div class="row">
+        <!-- Introduction Section -->
+        <div class="col-lg-12">
+            <div class="feature-card" data-aos="fade-up">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h2 class="text-warning mb-4">Secure Digital Democracy</h2>
+                <p class="about-description">
+                    SecureVote is an innovative online voting system that combines cutting-edge face recognition 
+                    technology with robust security measures to ensure secure and transparent elections. Our platform 
+                    represents the future of democratic participation, making voting more accessible while maintaining 
+                    the highest standards of security and integrity.
+                </p>
+            </div>
+        </div>
+
+        <!-- Key Features -->
+        <div class="col-lg-12 mt-4">
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                <h2 class="text-warning mb-4">Our Core Features</h2>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="feature-item hover-effect p-4">
+                            <i class="fas fa-user-shield text-warning mb-3"></i>
+                            <h4 class="text-warning">Advanced Security</h4>
+                            <p class="text-light">State-of-the-art facial recognition and liveness detection ensure voter authenticity.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="feature-item hover-effect p-4">
+                            <i class="fas fa-lock text-warning mb-3"></i>
+                            <h4 class="text-warning">Data Protection</h4>
+                            <p class="text-light">End-to-end encryption and secure data handling protect voter privacy.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="feature-item hover-effect p-4">
+                            <i class="fas fa-chart-line text-warning mb-3"></i>
+                            <h4 class="text-warning">Real-time Tracking</h4>
+                            <p class="text-light">Monitor voting progress and results with complete transparency.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="feature-item hover-effect p-4">
+                            <i class="fas fa-universal-access text-warning mb-3"></i>
+                            <h4 class="text-warning">Accessibility</h4>
+                            <p class="text-light">User-friendly interface accessible from any device with internet connection.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics -->
+        <div class="col-lg-12 mt-4">
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                <h2 class="text-warning mb-4">Our Impact</h2>
+                <div class="row text-center">
+                    <div class="col-md-4">
+                        <div class="stat-item hover-effect">
+                            <div class="animate-number" data-target="100000">0</div>
+                            <p class="text-light">Registered Voters</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="stat-item hover-effect">
+                            <div class="animate-number" data-target="99">0</div>
+                            <p class="text-light">Success Rate (%)</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="stat-item hover-effect">
+                            <div class="animate-number" data-target="50">0</div>
+                            <p class="text-light">Elections Conducted</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Our Mission -->
+        <div class="col-lg-12 mt-4">
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="feature-icon">
+                    <i class="fas fa-bullseye"></i>
+                </div>
+                <h2 class="text-warning mb-4">Our Mission</h2>
+                <p class="about-description">
+                    We are dedicated to revolutionizing the voting process by combining cutting-edge technology 
+                    with robust security measures. Our mission is to make democratic participation more accessible, 
+                    secure, and efficient while maintaining the highest standards of election integrity.
+                </p>
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <div class="mission-item hover-effect">
+                            <i class="fas fa-check-circle text-warning me-2"></i>
+                            <span class="text-light">Ensure election integrity</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mission-item hover-effect">
+                            <i class="fas fa-check-circle text-warning me-2"></i>
+                            <span class="text-light">Increase voter participation</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mission-item hover-effect">
+                            <i class="fas fa-check-circle text-warning me-2"></i>
+                            <span class="text-light">Protect voter privacy</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mission-item hover-effect">
+                            <i class="fas fa-check-circle text-warning me-2"></i>
+                            <span class="text-light">Enhance accessibility</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block scripts %}
+<script>
+    // Initialize number animation when stats section becomes visible
+    const statsSection = document.querySelector('.stat-item');
+    if (statsSection) {
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                animateNumbers();
+                observer.disconnect();
+            }
+        });
+        observer.observe(statsSection);
+    }
+
+    // Add hover effects to mission items
+    document.querySelectorAll('.mission-item').forEach(item => {
+        item.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateX(10px)';
+            this.querySelector('i').style.transform = 'scale(1.2)';
+            this.querySelector('span').style.color = '#ffc107';
+        });
+
+        item.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateX(0)';
+            this.querySelector('i').style.transform = 'scale(1)';
+            this.querySelector('span').style.color = '#ffffff';
+        });
+    });
+
+    // Add hover effects to feature items
+    document.querySelectorAll('.feature-item').forEach(item => {
+        item.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-10px)';
+            const icon = this.querySelector('i');
+            if (icon) {
+                icon.style.transform = 'scale(1.2) rotate(10deg)';
+            }
+        });
+
+        item.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+            const icon = this.querySelector('i');
+            if (icon) {
+                icon.style.transform = 'scale(1) rotate(0)';
+            }
+        });
+    });
+</script>
+{% endblock %}
+{% endblock %}

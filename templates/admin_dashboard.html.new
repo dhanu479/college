@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Dashboard · SecureVote{% endblock title %}
+
+{% block content %}
+<div class="container-fluid py-4">
+  <div class="row g-4">
+    <div class="col-md-5">
+      <div class="card bg-black border border-warning rounded-4 shadow-sm h-100">
+        <div class="card-body">
+          <h4 class="card-title">Add Candidate</h4>
+          <form method="POST" action="{{ url_for('add_candidate') }}" enctype="multipart/form-data">
+            <div class="mb-2"><input class="form-control" name="name" placeholder="Name" required></div>
+            <div class="mb-2"><input class="form-control" name="party" placeholder="Party" required></div>
+            <div class="mb-2"><input class="form-control" type="file" name="logo" accept="image/*"></div>
+            <button class="btn btn-warning w-100">Add</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-7">
+      <div class="card bg-black border border-warning rounded-4 shadow-sm h-100">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="card-title mb-0">Candidates</h4>
+            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#resetVotesModal">
+              <i class="fas fa-redo-alt me-2"></i>Reset All Votes
+            </button>
+          </div>
+          <ul class="list-group list-group-flush mb-4">
+            {% for c in candidates %}
+              <li class="list-group-item bg-black text-light d-flex justify-content-between align-items-center">
+                <span>{{ c['name'] }} <small class="text-secondary">({{ c['party'] }})</small></span>
+                <a class="btn btn-sm btn-outline-warning" href="{{ url_for('delete_candidate', cid=c['id']) }}">Delete</a>
+              </li>
+            {% endfor %}
+          </ul>
+
+          <div class="card bg-dark mb-4">
+            <div class="card-header bg-dark border-warning">
+              <h5 class="mb-0 text-warning">Voter Statistics</h5>
+            </div>
+            <div class="card-body">
+              <div class="row text-center g-3">
+                <div class="col">
+                  <div class="h2 text-warning">{{ total_users }}</div>
+                  <div class="text-secondary small">Total Users</div>
+                </div>
+                <div class="col">
+                  <div class="h2 text-warning">{{ voted_users }}</div>
+                  <div class="text-secondary small">Voted</div>
+                </div>
+                <div class="col">
+                  <div class="h2 text-warning">{{ total_votes }}</div>
+                  <div class="text-secondary small">Total Votes</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-dark table-hover">
+              <thead>
+                <tr>
+                  <th>Voter ID</th>
+                  <th>Name</th>
+                  <th>Phone</th>
+                  <th>Aadhaar</th>
+                  <th>Status</th>
+                  <th>Voted At</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for user in users %}
+                <tr>
+                  <td>{{ user.voter_id }}</td>
+                  <td>{{ user.username }}</td>
+                  <td>{{ user.country_code }} {{ user.phone_number }}</td>
+                  <td>{{ user.aadhaar[:4] }}...{{ user.aadhaar[-4:] }}</td>
+                  <td>
+                    {% if user.has_voted %}
+                      <span class="badge bg-success">Voted</span>
+                    {% else %}
+                      <span class="badge bg-secondary">Not Voted</span>
+                    {% endif %}
+                  </td>
+                  <td>{{ user.voted_at if user.voted_at else '-' }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Reset Votes Modal -->
+<div class="modal fade" id="resetVotesModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content bg-dark">
+      <div class="modal-header border-warning">
+        <h5 class="modal-title text-warning">Reset All Votes</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p class="text-warning">Are you sure you want to reset all votes? This action cannot be undone.</p>
+        <ul class="text-light">
+          <li>All votes will be deleted</li>
+          <li>All users' voting status will be reset</li>
+          <li>Users will be able to vote again</li>
+        </ul>
+        <form method="POST" action="{{ url_for('reset_votes') }}" id="resetVotesForm">
+          <div class="input-group">
+            <input type="text" class="form-control bg-dark text-light" placeholder="Type RESET to confirm" id="resetConfirm" required pattern="RESET">
+            <button type="submit" class="btn btn-danger" disabled id="resetSubmitBtn">
+              <i class="fas fa-exclamation-triangle me-2"></i>Reset All Votes
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer border-warning">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const resetConfirm = document.getElementById('resetConfirm');
+  const resetSubmitBtn = document.getElementById('resetSubmitBtn');
+  const resetForm = document.getElementById('resetVotesForm');
+
+  resetConfirm.addEventListener('input', function() {
+    resetSubmitBtn.disabled = this.value !== 'RESET';
+  });
+
+  resetForm.addEventListener('submit', function(e) {
+    if (!confirm('This will permanently delete all votes. Are you absolutely sure?')) {
+      e.preventDefault();
+    }
+  });
+});
+</script>
+{% endblock scripts %}

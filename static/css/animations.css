@@ -1,0 +1,176 @@
+/* Animated Background Gradients */
+.animated-gradient {
+    background: linear-gradient(
+        270deg,
+        #ffd700,
+        #ffa500,
+        #ff8c00,
+        #ffd700
+    );
+    background-size: 800% 800%;
+    animation: gradientShift 8s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Animated Circuit Board Pattern */
+.circuit-pattern {
+    background-color: #1a1a1a;
+    background-image: 
+        linear-gradient(rgba(255, 193, 7, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 193, 7, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+    animation: circuitMove 15s linear infinite;
+}
+
+@keyframes circuitMove {
+    from { background-position: 0 0; }
+    to { background-position: 20px 20px; }
+}
+
+/* Digital Rain Effect */
+.digital-rain {
+    position: relative;
+    overflow: hidden;
+}
+
+.digital-rain::before {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 200%;
+    background: repeating-linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 193, 7, 0.1) 0.5%,
+        transparent 1%
+    );
+    animation: digitalRain 20s linear infinite;
+}
+
+@keyframes digitalRain {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(50%); }
+}
+
+/* Shimmer Flow - Updated to replace breathing effect */
+.pulse-glow {
+    background: linear-gradient(
+        90deg,
+        rgba(255, 193, 7, 0) 0%,
+        rgba(255, 193, 7, 0.2) 50%,
+        rgba(255, 193, 7, 0) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmerFlow 3s infinite linear;
+}
+
+@keyframes shimmerFlow {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* Floating Animation */
+.floating {
+    animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes floating {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Data Processing Animation */
+.data-processing {
+    position: relative;
+    overflow: hidden;
+}
+
+.data-processing::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 193, 7, 0.2),
+        transparent
+    );
+    animation: dataProcess 1.5s linear infinite;
+}
+
+@keyframes dataProcess {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* Scanning Effect */
+.scanning {
+    position: relative;
+    overflow: hidden;
+}
+
+.scanning::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: rgba(255, 193, 7, 0.5);
+    animation: scanning 2s linear infinite;
+}
+
+@keyframes scanning {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(100%); }
+}
+
+/* Loading Spinner */
+.ai-loading {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(255, 193, 7, 0.3);
+    border-top-color: #ffc107;
+    border-radius: 50%;
+    animation: aiSpin 1s linear infinite;
+}
+
+@keyframes aiSpin {
+    to { transform: rotate(360deg); }
+}
+
+/* Binary Code Rain */
+.binary-rain {
+    position: relative;
+    overflow: hidden;
+}
+
+.binary-rain::before {
+    content: '10101110 01001100 11100101';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    font-family: monospace;
+    font-size: 12px;
+    line-height: 12px;
+    color: rgba(255, 193, 7, 0.2);
+    animation: binaryRain 20s linear infinite;
+    white-space: nowrap;
+}
+
+@keyframes binaryRain {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+}

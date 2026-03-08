@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% block title %}Home · SecureVote{% endblock %}
+
+{% block content %}
+
+    <!-- Hero Section -->
+<div class="text-center py-5">
+    <div class="">
+        <h1 class="display-4 fw-extrabold text-warning mb-4 hero-title">
+            <svg class="me-3" width="50" height="50"><use href="#ai-brain"/></svg>
+            Secure Online Voting
+        </h1>
+        <p class="lead text-secondary hero-description animate__animated animate__fadeIn animate__delay-1s mb-5" style="font-weight: 600; font-size: 1.4rem;">
+            Experience the future of democracy with our cutting-edge secure voting system
+        </p>
+        
+        <!-- CTA Buttons moved here -->
+        <div class="d-flex gap-3 justify-content-center mb-5 hero-buttons animate__animated animate__fadeInUp animate__delay-2s">
+            <a href="{{ url_for('login') }}" class="btn btn-warning btn-lg fw-semibold">
+                <i class="fas fa-user-circle me-2"></i>Voter Portal
+            </a>
+            <a href="{{ url_for('admin_login') }}" class="btn btn-outline-warning btn-lg">
+                <i class="fas fa-user-shield me-2"></i>Admin Dashboard
+            </a>
+        </div>
+    </div>
+    
+    <!-- Feature Cards -->
+    <div class="row justify-content-center mt-5 g-4">
+        <div class="col-md-4">
+            <div class="card bg-dark feature-item animate__animated animate__fadeInUp">
+                <div class="card-body">
+                    <svg width="60" height="60" class="mb-3"><use href="#face-recognition"/></svg>
+                    <h3 class="card-title h5">Face Recognition</h3>
+                    <p class="card-text text-secondary">Advanced biometric verification ensures voter authenticity</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-dark feature-item animate__animated animate__fadeInUp">
+                <div class="card-body">
+                    <svg width="60" height="60" class="mb-3"><use href="#ai-brain"/></svg>
+                    <h3 class="card-title h5">Liveness Detection</h3>
+                    <p class="card-text text-secondary">Real-time blink & head turn verification prevents fraud</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-dark feature-item animate__animated animate__fadeInUp">
+                <div class="card-body">
+                    <svg width="60" height="60" class="mb-3"><use href="#security-shield"/></svg>
+                    <h3 class="card-title h5">Anti-Spoofing</h3>
+                    <p class="card-text text-secondary">Advanced color/texture analysis prevents impersonation</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Section -->
+    <div class="row justify-content-center mt-5 g-4">
+        <div class="col-md-3">
+            <div class="stat-card p-3 animate__animated animate__fadeIn">
+                <h2 class="text-warning stat-number" data-target="99">0</h2>
+                <p class="text-secondary">Security Score</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card p-3 animate__animated animate__fadeIn">
+                <h2 class="text-warning stat-number" data-target="100000">0</h2>
+                <p class="text-secondary">Verified Voters</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card p-3 animate__animated animate__fadeIn">
+                <h2 class="text-warning stat-number" data-target="0">0</h2>
+                <p class="text-secondary">Security Breaches</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- How It Works Section -->
+    <div class="mt-5 pt-5">
+        <h2 class="text-warning mb-4">How It Works</h2>
+        <div class="row justify-content-center g-4">
+            <div class="col-md-3">
+                <div class="step-card animate__animated animate__fadeInUp">
+                    <div class="step-number">1</div>
+                    <h3 class="h5 mt-3">Register</h3>
+                    <p class="text-secondary">Create your secure voter account with facial verification</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="step-card animate__animated animate__fadeInUp" style="animation-delay: 0.2s">
+                    <div class="step-number">2</div>
+                    <h3 class="h5 mt-3">Verify</h3>
+                    <p class="text-secondary">Complete the liveness check and facial recognition</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="step-card animate__animated animate__fadeInUp" style="animation-delay: 0.4s">
+                    <div class="step-number">3</div>
+                    <h3 class="h5 mt-3">Vote</h3>
+                    <p class="text-secondary">Cast your vote securely and privately</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/home.js') }}?v=11"></script>
+{% endblock %}

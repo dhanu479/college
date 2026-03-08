@@ -1,0 +1,123 @@
+.nav-help-item {
+    background: rgba(0, 0, 51, 0.7);
+    border-radius: 15px;
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 193, 7, 0.2);
+    transition: all 0.3s ease;
+}
+
+.nav-help-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 193, 7, 0.4);
+}
+
+.nav-help-item i {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.accordion-item {
+    background: transparent !important;
+    border: 1px solid rgba(255, 193, 7, 0.2);
+    margin-bottom: 0.5rem;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.accordion-button {
+    background: rgba(0, 0, 51, 0.7) !important;
+    color: #fff !important;
+    border: none;
+    padding: 1.25rem;
+    transition: all 0.3s ease;
+}
+
+.accordion-button:not(.collapsed) {
+    background: rgba(0, 0, 51, 0.9) !important;
+    color: #ffc107 !important;
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+    border-color: rgba(255, 193, 7, 0.4);
+}
+
+.accordion-body {
+    background: rgba(0, 0, 51, 0.5);
+    color: #fff;
+    padding: 1.5rem;
+}
+
+.support-contact {
+    background: rgba(0, 0, 51, 0.7);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 193, 7, 0.2);
+    transition: all 0.3s ease;
+}
+
+.support-contact:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 193, 7, 0.4);
+}
+
+.support-contact i {
+    transition: transform 0.3s ease;
+}
+
+.support-contact:hover i {
+    transform: scale(1.2);
+}
+
+.feature-card {
+    background: rgba(0, 0, 51, 0.7);
+    border-radius: 15px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 193, 7, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Custom scrollbar for accordion content */
+.accordion-body::-webkit-scrollbar {
+    width: 8px;
+}
+
+.accordion-body::-webkit-scrollbar-track {
+    background: rgba(0, 0, 51, 0.3);
+}
+
+.accordion-body::-webkit-scrollbar-thumb {
+    background: rgba(255, 193, 7, 0.3);
+    border-radius: 4px;
+}
+
+.accordion-body::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 193, 7, 0.5);
+}
+
+/* Animation classes */
+.animate-fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+.animate-slide-up {
+    animation: slideUp 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}

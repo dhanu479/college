@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <!-- AI Brain Animation -->
+    <symbol id="ai-brain" viewBox="0 0 100 100">
+        <path class="brain-path" fill="none" stroke="#ffc107" stroke-width="2" d="M50,20 C60,20 70,30 70,40 C70,50 60,60 50,60 C40,60 30,50 30,40 C30,30 40,20 50,20">
+            <animate attributeName="d" 
+                     dur="3s" 
+                     repeatCount="indefinite"
+                     values="M50,20 C60,20 70,30 70,40 C70,50 60,60 50,60 C40,60 30,50 30,40 C30,30 40,20 50,20;
+                             M50,25 C65,25 75,35 75,45 C75,55 65,65 50,65 C35,65 25,55 25,45 C25,35 35,25 50,25;
+                             M50,20 C60,20 70,30 70,40 C70,50 60,60 50,60 C40,60 30,50 30,40 C30,30 40,20 50,20"/>
+        </path>
+        <circle class="node" cx="50" cy="40" r="3" fill="#ffc107">
+            <animate attributeName="r"
+                     dur="1.5s"
+                     repeatCount="indefinite"
+                     values="3;4;3"/>
+        </circle>
+    </symbol>
+
+    <!-- Security Shield Animation -->
+    <symbol id="security-shield" viewBox="0 0 100 100">
+        <path class="shield" fill="none" stroke="#ffc107" stroke-width="2" d="M50,10 L80,25 L80,55 C80,70 65,85 50,90 C35,85 20,70 20,55 L20,25 L50,10">
+            <animate attributeName="stroke-dasharray"
+                     dur="2s"
+                     repeatCount="indefinite"
+                     values="0,150;150,0;0,150"/>
+        </path>
+        <path class="checkmark" fill="none" stroke="#ffc107" stroke-width="2" d="M35,50 L45,60 L65,40">
+            <animate attributeName="stroke-dasharray"
+                     dur="2s"
+                     repeatCount="indefinite"
+                     values="0,50;50,0;0,50"/>
+        </path>
+    </symbol>
+
+    <!-- Face Recognition Grid -->
+    <symbol id="face-recognition" viewBox="0 0 100 100">
+        <rect class="scan-area" x="25" y="25" width="50" height="50" fill="none" stroke="#ffc107" stroke-width="1">
+            <animate attributeName="stroke-dasharray"
+                     dur="3s"
+                     repeatCount="indefinite"
+                     values="0,200;200,0;0,200"/>
+        </rect>
+        <line class="scan-line" x1="25" y1="50" x2="75" y2="50" stroke="#ffc107" stroke-width="1">
+            <animate attributeName="y1"
+                     attributeName2="y2"
+                     dur="2s"
+                     repeatCount="indefinite"
+                     values="25;75;25"/>
+        </line>
+        <circle class="point1" cx="40" cy="40" r="1" fill="#ffc107"/>
+        <circle class="point2" cx="60" cy="40" r="1" fill="#ffc107"/>
+        <path class="smile" fill="none" stroke="#ffc107" stroke-width="1" d="M40,60 Q50,70 60,60">
+            <animate attributeName="d"
+                     dur="3s"
+                     repeatCount="indefinite"
+                     values="M40,60 Q50,70 60,60;M40,65 Q50,75 60,65;M40,60 Q50,70 60,60"/>
+        </path>
+    </symbol>
+
+    <!-- Loading Spinner -->
+    <symbol id="loading-spinner" viewBox="0 0 100 100">
+        <circle class="spinner-track" cx="50" cy="50" r="40" fill="none" stroke="#ffc10733" stroke-width="4"/>
+        <circle class="spinner-head" cx="50" cy="50" r="40" fill="none" stroke="#ffc107" stroke-width="4" stroke-linecap="round">
+            <animate attributeName="stroke-dasharray"
+                     dur="1.5s"
+                     repeatCount="indefinite"
+                     values="0,251.2;251.2,0;0,251.2"/>
+            <animateTransform attributeName="transform"
+                            type="rotate"
+                            from="0 50 50"
+                            to="360 50 50"
+                            dur="1.5s"
+                            repeatCount="indefinite"/>
+        </circle>
+    </symbol>
+</svg>

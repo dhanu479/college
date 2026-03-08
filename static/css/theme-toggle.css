@@ -1,0 +1,141 @@
+/* Theme Toggle Styles */
+.theme-toggle {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 15px 10px;
+    border-radius: 25px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.theme-toggle-btn {
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    position: relative;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle-btn:hover {
+    background: rgba(255, 215, 0, 0.1);
+}
+
+.theme-toggle-btn.active {
+    background: var(--ai-primary);
+    color: #000;
+}
+
+.theme-toggle-btn i {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.theme-toggle-btn:hover i {
+    transform: scale(1.2);
+}
+
+/* Theme Colors */
+[data-theme="light"] {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --text-primary: #212529;
+    --text-secondary: #6c757d;
+    --border-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2d2d2d;
+    --text-primary: #ffffff;
+    --text-secondary: #bababa;
+    --border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="cyberpunk"] {
+    --bg-primary: #000000;
+    --bg-secondary: #1a1a2e;
+    --text-primary: #00ff00;
+    --text-secondary: #00cc00;
+    --border-color: rgba(0, 255, 0, 0.2);
+}
+
+/* Theme Transition */
+body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Enhanced AI Elements for different themes */
+[data-theme="light"] .ai-card {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="cyberpunk"] .ai-button {
+    border-color: #00ff00;
+    color: #00ff00;
+}
+
+[data-theme="cyberpunk"] .ai-button:hover {
+    background: #00ff00;
+    color: #000000;
+}
+
+/* Theme-specific Animations */
+[data-theme="cyberpunk"] .neural-loader::after {
+    background: linear-gradient(90deg, transparent, #00ff00, transparent);
+}
+
+[data-theme="light"] .ai-glow::before {
+    border-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Custom Scrollbar for each theme */
+[data-theme="dark"]::-webkit-scrollbar {
+    width: 10px;
+}
+
+[data-theme="dark"]::-webkit-scrollbar-track {
+    background: #2d2d2d;
+}
+
+[data-theme="dark"]::-webkit-scrollbar-thumb {
+    background: #ffd700;
+    border-radius: 5px;
+}
+
+[data-theme="cyberpunk"]::-webkit-scrollbar-thumb {
+    background: #00ff00;
+    border-radius: 5px;
+}
+
+/* Theme-specific card styles */
+[data-theme="light"] .card {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .card {
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 215, 0, 0.1);
+}
+
+[data-theme="cyberpunk"] .card {
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(0, 255, 0, 0.2);
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
+}

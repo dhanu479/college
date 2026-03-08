@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+
+{% block title %}How It Works - SecureVote{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/feature-sections.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="text-center text-warning mb-5 animate__animated animate__fadeInDown">How SecureVote Works</h1>
+    
+    <div class="timeline">
+        <!-- Step 1: Registration -->
+        <div class="timeline-item" data-aos="fade-right">
+            <div class="timeline-number">1</div>
+            <div class="feature-card">
+                <div class="row align-items-center">
+                    <div class="col-md-6 order-md-1">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-plus text-warning"></i>
+                        </div>
+                        <h3 class="text-warning">Registration</h3>
+                        <p class="text-light">Create your secure account:</p>
+                        <ul class="feature-list">
+                            <li>Provide valid ID and documentation</li>
+                            <li>Complete facial recognition setup</li>
+                            <li>Verify your identity</li>
+                            <li>Set up secure login credentials</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6 order-md-2">
+                        <div class="step-image-container mb-3">
+                            <img src="{{ url_for('static', filename='images/how_it_works/step_registration.png') }}" alt="Registration Demo" class="img-fluid rounded-4 shadow-lg demo-image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: Face Recognition Setup -->
+        <div class="timeline-item" data-aos="fade-left">
+            <div class="timeline-number">2</div>
+            <div class="feature-card">
+                <div class="row align-items-center">
+                    <div class="col-md-6 order-md-2">
+                        <div class="feature-icon">
+                            <i class="fas fa-camera text-warning"></i>
+                        </div>
+                        <h3 class="text-warning">Face Recognition Setup</h3>
+                        <p class="text-light">Complete biometric enrollment:</p>
+                        <ul class="feature-list">
+                            <li>Capture facial images</li>
+                            <li>Perform liveness detection</li>
+                            <li>Verify image quality</li>
+                            <li>Confirm identity match</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6 order-md-1">
+                        <div class="step-image-container mb-3">
+                            <img src="{{ url_for('static', filename='images/how_it_works/step_face_recognition.png') }}" alt="Face Recognition Demo" class="img-fluid rounded-4 shadow-lg demo-image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3: Authentication -->
+        <div class="timeline-item" data-aos="fade-right">
+            <div class="timeline-number">3</div>
+            <div class="feature-card">
+                <div class="row align-items-center">
+                    <div class="col-md-6 order-md-1">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt text-warning"></i>
+                        </div>
+                        <h3 class="text-warning">Authentication</h3>
+                        <p class="text-light">Secure login process:</p>
+                        <ul class="feature-list">
+                            <li>Enter login credentials</li>
+                            <li>Complete face verification</li>
+                            <li>Pass liveness check</li>
+                            <li>Access voting interface</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6 order-md-2">
+                        <div class="step-image-container mb-3">
+                            <img src="{{ url_for('static', filename='images/how_it_works/step_authentication.png') }}" alt="Authentication Demo" class="img-fluid rounded-4 shadow-lg demo-image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 4: Voting -->
+        <div class="timeline-item" data-aos="fade-left">
+            <div class="timeline-number">4</div>
+            <div class="feature-card">
+                <div class="row align-items-center">
+                    <div class="col-md-6 order-md-2">
+                        <div class="feature-icon">
+                            <i class="fas fa-vote-yea text-warning"></i>
+                        </div>
+                        <h3 class="text-warning">Casting Your Vote</h3>
+                        <p class="text-light">Secure voting process:</p>
+                        <ul class="feature-list">
+                            <li>Select your candidate</li>
+                            <li>Review your selection</li>
+                            <li>Confirm and submit vote</li>
+                            <li>Receive verification</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6 order-md-1">
+                        <div class="step-image-container mb-3">
+                            <img src="{{ url_for('static', filename='images/how_it_works/step_voting.png') }}" alt="Voting Demo" class="img-fluid rounded-4 shadow-lg demo-image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 5: Verification -->
+        <div class="timeline-item" data-aos="fade-right">
+            <div class="timeline-number">5</div>
+            <div class="feature-card">
+                <div class="row align-items-center">
+                    <div class="col-md-6 order-md-1">
+                        <div class="feature-icon">
+                            <i class="fas fa-check-circle text-warning"></i>
+                        </div>
+                        <h3 class="text-warning">Vote Verification</h3>
+                        <p class="text-light">Ensure vote integrity:</p>
+                        <ul class="feature-list">
+                            <li>Receive confirmation code</li>
+                            <li>Track vote status</li>
+                            <li>View vote receipt</li>
+                            <li>Access vote audit trail</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6 order-md-2">
+                        <div class="step-image-container mb-3">
+                            <img src="{{ url_for('static', filename='images/how_it_works/step_verification.png') }}" alt="Verification Demo" class="img-fluid rounded-4 shadow-lg demo-image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,208 @@
+/* Common interactive styles */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(to right, #ffc107, #ff6b6b);
+    z-index: 9999;
+    transition: width 0.3s ease;
+}
+
+/* Enhanced feature cards */
+.feature-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.feature-card:hover::before {
+    left: 100%;
+}
+
+/* Timeline enhancements */
+.timeline-number {
+    transition: all 0.3s ease;
+}
+
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 193, 7, 0.3);
+    border-radius: 50%;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 0;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: translateX(-50%) scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: translateX(-50%) scale(1.5);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateX(-50%) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Enhanced accordion */
+.accordion-item {
+    transition: all 0.3s ease;
+}
+
+.accordion-button::after {
+    transition: all 0.3s ease;
+}
+
+.accordion-button:not(.collapsed)::after {
+    transform: rotate(-180deg);
+}
+
+/* Feature list enhancements */
+.feature-list li {
+    transition: all 0.3s ease;
+}
+
+.feature-list li::before {
+    transition: all 0.3s ease;
+}
+
+.feature-list li:hover::before {
+    transform: scale(1.5);
+}
+
+/* Support contact cards */
+.support-contact {
+    transition: all 0.3s ease;
+}
+
+.support-contact i {
+    transition: all 0.3s ease;
+}
+
+/* Privacy and Terms sections */
+.privacy-section, .terms-section {
+    transition: all 0.3s ease;
+}
+
+/* Animated numbers */
+.animate-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #ffc107;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+/* Interactive navigation */
+.nav-help-item {
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-help-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: #ffc107;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-help-item:hover::after {
+    width: 80%;
+}
+
+/* Floating elements */
+.floating {
+    animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes floating {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Page transitions */
+.page-transition {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Enhanced hover effects */
+.hover-glow:hover {
+    box-shadow: 0 0 20px rgba(255, 193, 7, 0.3);
+}
+
+.hover-scale:hover {
+    transform: scale(1.05);
+}
+
+.hover-rotate:hover {
+    transform: rotate(5deg);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 51, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 193, 7, 0.5);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 193, 7, 0.7);
+}
+
+/* Responsive enhancements */
+@media (max-width: 768px) {
+    .feature-card {
+        transform: none !important;
+    }
+    
+    .timeline-item::after {
+        left: 40px;
+    }
+    
+    .floating {
+        animation: none;
+    }
+}

@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %}Verify OTP · SecureVote{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-5">
+    <div class="card bg-black border border-warning rounded-4 shadow-sm animate__animated animate__fadeIn">
+      <div class="card-body p-4">
+        <div class="text-center mb-4">
+            <div class="display-1 text-warning mb-2">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3 class="card-title">Security Verification</h3>
+            <p class="text-secondary">We've sent a 4-digit code to your registered mobile number and email.</p>
+        </div>
+        
+        <form method="POST">
+          <div class="mb-4 text-center">
+            <label class="form-label d-block mb-3 text-warning fw-bold">Enter OTP Code</label>
+            <input type="text" 
+                   class="form-control form-control-lg text-center fw-bold letter-spacing-5" 
+                   name="otp" 
+                   maxlength="4" 
+                   placeholder="· · · ·" 
+                   required 
+                   style="font-size: 2.5rem; letter-spacing: 1rem; background: rgba(255,193,7,0.05); border-color: rgba(255,193,7,0.4); color: white;">
+          </div>
+          
+          <button class="btn btn-warning btn-lg w-100 mb-3 shadow">
+              <i class="fas fa-check-circle me-2"></i>Verify & Register
+          </button>
+          
+          <div class="text-center">
+            <p class="text-secondary small">
+                Didn't receive the code? 
+                <a href="{{ url_for('register') }}" class="link-warning text-decoration-none">Resend Code</a>
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+    
+    <div class="text-center mt-4">
+        <a href="{{ url_for('register') }}" class="text-secondary text-decoration-none small">
+            <i class="fas fa-arrow-left me-1"></i>Return to Registration
+        </a>
+    </div>
+  </div>
+</div>
+
+<style>
+.letter-spacing-5 {
+    letter-spacing: 5px;
+}
+</style>
+{% endblock %}

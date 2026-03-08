@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}Terms of Service - SecureVote{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/feature-sections.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="text-center text-warning mb-5 animate__animated animate__fadeInDown">Terms of Service</h1>
+    
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="feature-card" data-aos="fade-up">
+                <h2 class="text-warning mb-4">Terms and Conditions</h2>
+                <p class="text-light">
+                    By using SecureVote, you agree to comply with and be bound by the following terms and conditions.
+                </p>
+
+                <div class="terms-section mb-4">
+                    <h3 class="text-warning">Eligibility</h3>
+                    <ul class="feature-list">
+                        <li>Must be a registered voter</li>
+                        <li>Must provide valid identification</li>
+                        <li>Must complete face recognition setup</li>
+                        <li>Must maintain account security</li>
+                    </ul>
+                </div>
+
+                <div class="terms-section mb-4">
+                    <h3 class="text-warning">User Responsibilities</h3>
+                    <ul class="feature-list">
+                        <li>Provide accurate information</li>
+                        <li>Maintain confidentiality of credentials</li>
+                        <li>Report suspicious activities</li>
+                        <li>Follow voting procedures</li>
+                    </ul>
+                </div>
+
+                <div class="terms-section mb-4">
+                    <h3 class="text-warning">Prohibited Actions</h3>
+                    <ul class="feature-list">
+                        <li>Attempting multiple votes</li>
+                        <li>Sharing account credentials</li>
+                        <li>Interfering with the system</li>
+                        <li>Misusing personal data</li>
+                    </ul>
+                </div>
+
+                <div class="terms-section mb-4">
+                    <h3 class="text-warning">System Usage</h3>
+                    <ul class="feature-list">
+                        <li>Follow security protocols</li>
+                        <li>Use supported devices/browsers</li>
+                        <li>Complete all verification steps</li>
+                        <li>Respect system limitations</li>
+                    </ul>
+                </div>
+
+                <div class="terms-section mb-4">
+                    <h3 class="text-warning">Data Usage</h3>
+                    <ul class="feature-list">
+                        <li>Consent to data collection</li>
+                        <li>Accept privacy policy terms</li>
+                        <li>Allow necessary processing</li>
+                        <li>Understand data retention</li>
+                    </ul>
+                </div>
+
+                <div class="terms-section">
+                    <h3 class="text-warning">Contact Information</h3>
+                    <p class="text-light">
+                        For questions about these terms, please contact us:
+                    </p>
+                    <ul class="feature-list">
+                        <li>Email: securevotehelper@gmail.com</li>
+                        <li>Phone: +91 95132 93912</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

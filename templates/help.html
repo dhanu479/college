@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+
+{% block title %}Help & FAQ - SecureVote{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/about-pages.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/help.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="text-warning text-center mb-5 animate__animated animate__fadeInDown">Help & FAQ</h1>
+            
+            <!-- Quick Navigation -->
+            <div class="feature-card mb-5" data-aos="fade-up">
+                <h2 class="text-warning mb-4">Quick Navigation Guide</h2>
+                <div class="row g-4">
+                    <div class="col-md-3">
+                        <div class="nav-help-item text-center p-3 h-100">
+                            <i class="fas fa-home fa-2x text-warning mb-3"></i>
+                            <h4>Home</h4>
+                            <p>Access main features and latest updates</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="nav-help-item text-center p-3 h-100">
+                            <i class="fas fa-user-plus fa-2x text-warning mb-3"></i>
+                            <h4>Registration</h4>
+                            <p>Create account and verify identity</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="nav-help-item text-center p-3 h-100">
+                            <i class="fas fa-vote-yea fa-2x text-warning mb-3"></i>
+                            <h4>Voting</h4>
+                            <p>Cast your vote in active elections</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="nav-help-item text-center p-3 h-100">
+                            <i class="fas fa-chart-bar fa-2x text-warning mb-3"></i>
+                            <h4>Results</h4>
+                            <p>View election outcomes</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Common Issues -->
+            <div class="feature-card mb-5" data-aos="fade-up">
+                <h2 class="text-warning mb-4">Common Issues & Solutions</h2>
+                <div class="accordion" id="issuesAccordion">
+                    <!-- Face Recognition -->
+                    <div class="accordion-item bg-dark border-warning mb-2">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#issue1">
+                                <i class="fas fa-camera me-2 text-warning"></i>Face Recognition Issues
+                            </button>
+                        </h3>
+                        <div id="issue1" class="accordion-collapse collapse" data-bs-parent="#issuesAccordion">
+                            <div class="accordion-body">
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><i class="fas fa-check-circle text-warning me-2"></i>Ensure good lighting conditions</li>
+                                    <li class="mb-2"><i class="fas fa-check-circle text-warning me-2"></i>Face the camera directly</li>
+                                    <li class="mb-2"><i class="fas fa-check-circle text-warning me-2"></i>Remove face coverings</li>
+                                    <li class="mb-2"><i class="fas fa-check-circle text-warning me-2"></i>Try a different browser</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Login Problems -->
+                    <div class="accordion-item bg-dark border-warning mb-2">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#issue2">
+                                <i class="fas fa-key me-2 text-warning"></i>Login Problems
+                            </button>
+                        </h3>
+                        <div id="issue2" class="accordion-collapse collapse" data-bs-parent="#issuesAccordion">
+                            <div class="accordion-body">
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><i class="fas fa-check-circle text-warning me-2"></i>Verify email and password</li>
+                                    <li class="mb-2"><i class="fas fa-check-circle text-warning me-2"></i>Clear browser cache</li>
+                                    <li class="mb-2"><i class="fas fa-check-circle text-warning me-2"></i>Use "Forgot Password"</li>
+                                    <li class="mb-2"><i class="fas fa-check-circle text-warning me-2"></i>Check account verification</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Voting Issues -->
+                    <div class="accordion-item bg-dark border-warning">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button collapsed bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#issue3">
+                                <i class="fas fa-vote-yea me-2 text-warning"></i>Voting Issues
+                            </button>
+                        </h3>
+                        <div id="issue3" class="accordion-collapse collapse" data-bs-parent="#issuesAccordion">
+                            <div class="accordion-body">
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><i class="fas fa-check-circle text-warning me-2"></i>Check voting eligibility</li>
+                                    <li class="mb-2"><i class="fas fa-check-circle text-warning me-2"></i>Verify election is active</li>
+                                    <li class="mb-2"><i class="fas fa-check-circle text-warning me-2"></i>Ensure stable internet</li>
+                                    <li class="mb-2"><i class="fas fa-check-circle text-warning me-2"></i>Contact support if needed</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Customer Support -->
+            <div class="feature-card" data-aos="fade-up">
+                <h2 class="text-warning mb-4">Customer Support</h2>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="support-contact text-center p-4">
+                            <i class="fas fa-envelope fa-3x text-warning mb-3"></i>
+                            <h3>Email Support</h3>
+                            <p class="mb-2">
+                                <a href="mailto:securevotehelper@gmail.com" class="text-warning text-decoration-none">
+                                    securevotehelper@gmail.com
+                                </a>
+                            </p>
+                            <small class="text-light">24/7 Support Available</small>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="support-contact text-center p-4">
+                            <i class="fas fa-phone fa-3x text-warning mb-3"></i>
+                            <h3>Phone Support</h3>
+                            <p class="mb-2">
+                                <a href="tel:9513293912" class="text-warning text-decoration-none">
+                                    +91 95132 93912
+                                </a>
+                            </p>
+                            <small class="text-light">Mon-Fri: 9AM-6PM IST</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Add hover effects to navigation items
+    document.querySelectorAll('.nav-help-item').forEach(item => {
+        item.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-5px)';
+            this.style.transition = 'transform 0.3s ease';
+        });
+        item.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    });
+
+    // Add hover effects to support contact cards
+    document.querySelectorAll('.support-contact').forEach(item => {
+        item.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.05)';
+            this.style.transition = 'transform 0.3s ease';
+        });
+        item.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1)';
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,295 @@
+/* AI Theme Enhancements */
+:root {
+    --ai-primary: #ffd700;
+    --ai-secondary: #00ff00;
+    --ai-glow: 0 0 10px rgba(255, 215, 0, 0.5);
+    --ai-pulse-duration: 2s;
+}
+
+/* Glowing Elements */
+.ai-glow {
+    position: relative;
+    overflow: hidden;
+}
+
+.ai-glow::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border: 2px solid var(--ai-primary);
+    border-radius: inherit;
+    animation: ai-pulse var(--ai-pulse-duration) infinite;
+    z-index: -1;
+}
+
+/* Neural Network Loading Effect */
+.neural-loader {
+    position: relative;
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 215, 0, 0.1);
+    overflow: hidden;
+    border-radius: 2px;
+}
+
+.neural-loader::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 30%;
+    background: linear-gradient(90deg, transparent, var(--ai-primary), transparent);
+    animation: neural-progress 1.5s infinite;
+}
+
+/* AI Card Effects */
+.ai-card {
+    background: #000000 !important;
+    border: 1px solid rgba(255, 215, 0, 0.1);
+    border-radius: 15px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.ai-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.2);
+    border-color: rgba(255, 215, 0, 0.3);
+}
+
+/* Interactive Buttons */
+.ai-button {
+    position: relative;
+    background: transparent;
+    border: 2px solid var(--ai-primary);
+    color: var(--ai-primary);
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.ai-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: var(--ai-primary);
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    transition: width 0.6s ease, height 0.6s ease;
+    z-index: -1;
+}
+
+.ai-button:hover {
+    color: #000;
+    text-shadow: none;
+}
+
+.ai-button:hover::before {
+    width: 300%;
+    height: 300%;
+}
+
+/* AI Form Elements */
+.ai-input {
+    background: #111111 !important;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+.ai-input:focus {
+    border-color: var(--ai-primary);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+    outline: none;
+}
+
+/* AI Navigation Menu */
+.ai-nav-link {
+    position: relative;
+    color: rgba(255, 215, 0, 0.7);
+    transition: all 0.3s ease;
+}
+
+.ai-nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--ai-primary);
+    transition: width 0.3s ease;
+}
+
+.ai-nav-link:hover {
+    color: var(--ai-primary);
+}
+
+.ai-nav-link:hover::after {
+    width: 100%;
+}
+
+/* AI Section Headers */
+.ai-header {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 2rem;
+    color: var(--ai-primary);
+}
+
+.ai-header::before {
+    content: '[';
+    margin-right: 0.5rem;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all 0.3s ease;
+}
+
+.ai-header::after {
+    content: ']';
+    margin-left: 0.5rem;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.3s ease;
+}
+
+.ai-header:hover::before,
+.ai-header:hover::after {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* AI Grid Layout */
+.ai-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    padding: 2rem 0;
+}
+
+/* AI Feature List */
+.ai-feature-list {
+    list-style: none;
+    padding: 0;
+}
+
+.ai-feature-item {
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.ai-feature-item::before {
+    content: '>';
+    position: absolute;
+    left: 0;
+    color: var(--ai-primary);
+    opacity: 0.7;
+    transition: transform 0.3s ease;
+}
+
+.ai-feature-item:hover {
+    transform: translateX(10px);
+}
+
+.ai-feature-item:hover::before {
+    transform: scale(1.2);
+    opacity: 1;
+}
+
+/* Animations */
+@keyframes ai-pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(255, 215, 0, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 215, 0, 0);
+    }
+}
+
+@keyframes neural-progress {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(400%);
+    }
+}
+
+/* AI Stats Display */
+.ai-stat {
+    text-align: center;
+    padding: 1.5rem;
+    background: #0b0f19 !important;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.ai-stat:hover {
+    background: rgba(0, 0, 0, 0.6);
+    transform: translateY(-5px);
+}
+
+.ai-stat-value {
+    font-size: 2.5rem;
+    color: var(--ai-primary);
+    margin-bottom: 0.5rem;
+}
+
+.ai-stat-label {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+}
+
+/* AI Progress Bars */
+.ai-progress {
+    height: 6px;
+    background: rgba(255, 215, 0, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+    margin: 1rem 0;
+}
+
+.ai-progress-bar {
+    height: 100%;
+    background: var(--ai-primary);
+    border-radius: 3px;
+    transition: width 1s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.ai-progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    animation: progress-shine 1.5s infinite;
+}
+
+@keyframes progress-shine {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}

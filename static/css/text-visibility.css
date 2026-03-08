@@ -1,0 +1,427 @@
+/* Base styles for better text visibility */
+body {
+    background-color: #000033;
+    color: #ffffff;
+}
+
+/* Glass morphism container */
+.glass-container {
+    background: rgba(0, 0, 51, 0.8);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    min-height: 100vh;
+}
+
+/* Improved text visibility */
+.text-enhancement {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    letter-spacing: 0.02em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    text-shadow: 0 0 15px rgba(255, 193, 7, 0.3);
+    letter-spacing: 0.03em;
+}
+
+/* Card and content improvements */
+.content-card {
+    background: rgba(0, 0, 51, 0.8);
+    border: 1px solid rgba(255, 193, 7, 0.2);
+    border-radius: 15px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+}
+
+.content-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 193, 7, 0.4);
+}
+
+/* Text containers with better contrast */
+.text-container {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin: 1rem 0;
+}
+
+/* Enhanced link visibility without breaking dropdown toggles */
+a:not(.btn):not(.dropdown-toggle) {
+    color: #ffd700;
+    text-decoration: none;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+a:not(.btn):not(.dropdown-toggle):hover {
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+a:not(.btn):not(.dropdown-toggle):after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: #ffd700;
+    transition: width 0.3s ease;
+}
+
+a:not(.btn):not(.dropdown-toggle):hover:after {
+    width: 100%;
+}
+
+/* Professional form styling */
+.form-control {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 193, 7, 0.2);
+    color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 193, 7, 0.5);
+    box-shadow: 0 0 15px rgba(255, 193, 7, 0.2);
+    color: #ffffff;
+}
+
+/* Button enhancements */
+.btn {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+}
+
+.btn:active::after {
+    width: 200px;
+    height: 200px;
+    opacity: 0;
+}
+
+/* Table improvements */
+.table {
+    background: rgba(0, 0, 51, 0.6);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.table th {
+    background: rgba(255, 193, 7, 0.1);
+    border-color: rgba(255, 193, 7, 0.2);
+}
+
+.table td {
+    border-color: rgba(255, 193, 7, 0.1);
+}
+
+/* Navigation enhancements */
+.navbar {
+    background: rgba(0, 0, 51, 0.9) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Card hover effects */
+.hover-card {
+    transition: all 0.3s ease;
+}
+
+.hover-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Loading and progress indicators */
+.loading-indicator {
+    background: linear-gradient(90deg, #ffd700, #ff8c00);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: gradient 2s ease infinite;
+}
+
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 10px;
+    background: rgba(0, 0, 51, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 193, 7, 0.3);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 193, 7, 0.5);
+}
+
+/* Force bootstrap text utilities to use theme colors and improve contrast */
+.text-secondary {
+    color: rgba(255, 255, 255, 0.95) !important; /* High contrast white for dark backgrounds */
+    font-weight: 500 !important;
+    line-height: 1.6 !important;
+}
+
+[data-theme="light"] .text-secondary {
+    color: #333333 !important; /* High contrast dark grey for light backgrounds */
+}
+
+[data-theme="cyberpunk"] .text-secondary {
+    color: #44ff44 !important; /* Brighter green for better contrast, less glow */
+    text-shadow: none !important;
+}
+
+.text-warning {
+    color: #ffd700 !important;
+    font-weight: 700 !important;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8) !important; /* Shadow for legibility on light backgrounds */
+}
+
+[data-theme="light"] .text-warning {
+    color: #856404 !important; /* Darker gold/brown for better visibility on white */
+    text-shadow: none !important;
+}
+
+/* --- ALIGNMENT FIXES --- */
+
+/* Fix navbar link squashing on the right */
+.navbar-nav {
+    gap: 1.5rem !important;
+    justify-content: flex-end !important;
+    width: 100% !important;
+    padding-right: 1rem !important;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    display: flex !important;
+    align-items: center !important;
+    white-space: nowrap !important;
+    padding: 0.5rem 0 !important;
+    margin: 0 !important;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5) !important;
+}
+
+[data-theme="light"] .navbar-dark .navbar-nav .nav-link {
+    color: #000000 !important;
+    text-shadow: none !important;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: #ffd700 !important;
+}
+
+/* Fix Hero section titles for extreme clarity */
+.hero-title {
+    font-weight: 900 !important;
+    letter-spacing: -1px !important;
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.8)) !important;
+}
+
+[data-theme="light"] .hero-title {
+    color: #000000 !important;
+    filter: none !important;
+}
+
+.hero-description {
+    font-size: 1.4rem !important;
+    font-weight: 600 !important;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.7) !important;
+}
+
+[data-theme="light"] .hero-description {
+    color: #333333 !important;
+    text-shadow: none !important;
+}
+
+/* Clear Feature card titles */
+.card-title {
+    font-weight: 700 !important;
+    color: #ffffff !important;
+}
+
+[data-theme="light"] .card-title {
+    color: #000000 !important;
+}
+
+.card-text {
+    font-weight: 500 !important;
+}
+
+/* Fix Hero buttons centering */
+.hero-buttons {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 1.5rem !important;
+    margin: 0 auto !important;
+    max-width: fit-content !important;
+}
+
+[data-theme="light"] .hero-buttons .btn-warning {
+    color: #000000 !important;
+    font-weight: 700 !important;
+}
+
+[data-theme="light"] .hero-buttons .btn-outline-warning {
+    color: #856404 !important;
+    border-color: #856404 !important;
+    font-weight: 700 !important;
+}
+
+/* Fix Feature Card vertical misalignment */
+.row.justify-content-center.mt-5.g-4 {
+    display: flex !important;
+    align-items: stretch !important;
+    justify-content: center !important;
+}
+
+.row.justify-content-center.mt-5.g-4 .col-md-4 {
+    display: flex !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.feature-item {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    margin-top: 0 !important;
+    flex: 1 !important;
+}
+
+/* Fix broken dropdown carets by completely removing the :after conflict */
+.dropdown-toggle::after {
+    display: inline-block !important;
+    margin-left: 0.255em !important;
+    vertical-align: 0.255em !important;
+    content: "" !important;
+    border-top: 0.3em solid !important;
+    border-right: 0.3em solid transparent !important;
+    border-bottom: 0 !important;
+    border-left: 0.3em solid transparent !important;
+    position: static !important;
+    height: auto !important;
+    width: auto !important;
+    background-color: transparent !important;
+}
+
+/* --- OVERRIDES TO REMOVE GLASSY LOOK FOR CLEARER TEXT --- */
+html body * {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+/* Make typical glassy containers solid opaque colors based on theme */
+html body .glass-container, 
+html body .navbar {
+    background: #000000 !important;
+}
+
+html body .content-card, 
+html body .card, 
+html body .card-body,
+html body .form-control,
+html body .feature-item,
+html body .step-card,
+html body .stat-card,
+html body .data-processing,
+html body .scanning,
+html body .digital-rain,
+html body .animated-gradient {
+    background: #000000 !important;
+    background-color: #000000 !important;
+}
+
+/* Ensure light mode stays solid light */
+html body[data-theme="light"] .glass-container,
+html body[data-theme="light"] .navbar,
+html body[data-theme="light"] .circuit-pattern,
+html body[data-theme="light"] .digital-rain,
+html body[data-theme="light"] {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+}
+
+html body[data-theme="light"] .content-card,
+html body[data-theme="light"] .card,
+html body[data-theme="light"] .card-body,
+html body[data-theme="light"] .form-control,
+html body[data-theme="light"] .feature-item,
+html body[data-theme="light"] .step-card,
+html body[data-theme="light"] .stat-card,
+html body[data-theme="light"] .data-processing,
+html body[data-theme="light"] .scanning,
+html body[data-theme="light"] .digital-rain,
+html body[data-theme="light"] .animated-gradient {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+}
+
+/* --- DISABLE INFINITE BACKGROUND ANIMATIONS --- */
+.animated-gradient,
+.pulse-glow,
+.floating,
+.floating:hover,
+.data-processing::after,
+.scanning::before,
+.binary-rain::before,
+.cyberpunk-grid,
+.cyberpunk-grid::before,
+.data-stream,
+.data-stream::before,
+.data-stream::after,
+.cyber-circuit,
+.glow-orb,
+.neural-loader::after,
+.ai-glow::before,
+.circuit-pattern,
+.digital-rain,
+.digital-rain::before,
+.shimmerFlow,
+.glowPulse,
+.pulse-button,
+.hero-title,
+.hero-description,
+.card-title,
+.card-text,
+.stat-card,
+.feature-item,
+.step-card {
+    animation-iteration-count: 0 !important;
+    animation: none !important;
+    transition: none !important; /* Disable all transitions that might look like floating */
+}
+
+/* Allow entrance animations to run ONLY once */
+.animate__animated {
+    animation-iteration-count: 1 !important;
+}

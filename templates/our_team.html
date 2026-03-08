@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block title %}Our Team - SecureVote{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/about-pages.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/feature-sections.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/team.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container py-5 team-page">
+    <h1 class="text-center text-warning mb-5 animate__animated animate__fadeInDown">Meet Our Team</h1>
+    
+    <!-- Core Team Section -->
+    <div class="feature-card mb-5" data-aos="fade-up" data-aos-delay="100">
+        <h2 class="text-warning mb-4 text-center">Our Team</h2>
+        <div class="row g-4 justify-content-center">
+            <!-- Project Manager -->
+            <div class="col-lg-4">
+                <div class="team-member-card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="member-image">
+                                <img src="{{ url_for('static', filename='images/team/dhananjaya.jpg') }}" alt="DHANANJAYA M R - Project Manager" class="img-fluid rounded-circle mx-auto d-block" style="width: 220px; height: 220px; object-fit: cover;">
+                            </div>
+                            <div class="member-info text-center p-4">
+                                <h3 class="text-warning">DHANANJAYA M R</h3>
+                                <p class="text-light-emphasis mb-0">Project Manager / Team Lead</p>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <h3 class="text-warning mb-3">About DHANANJAYA</h3>
+                            <p class="text-light-emphasis mb-4">Driving innovation in secure digital voting through advanced biometric verification and robust system architecture.</p>
+                            <div class="social-links mt-3">
+                                <a href="#" class="text-warning me-3"><i class="fab fa-linkedin fa-2x"></i></a>
+                                <a href="#" class="text-warning me-3"><i class="fab fa-github fa-2x"></i></a>
+                                <a href="#" class="text-warning"><i class="fas fa-envelope fa-2x"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Team Stats -->
+    <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+        <h2 class="text-warning mb-4 text-center">Our Team in Numbers</h2>
+        <div class="row text-center g-4">
+            <div class="col-md-4">
+                <div class="stat-card">
+                    <div class="animate-number" data-target="1">0</div>
+                    <p class="text-light">Team Members</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stat-card">
+                    <div class="animate-number" data-target="1">0</div>
+                    <p class="text-light">Different Roles</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stat-card">
+                    <div class="animate-number" data-target="1">0</div>
+                    <p class="text-light">Unified Goal</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block scripts %}
+<script>
+    // Initialize number animation when stats section becomes visible
+    const statsSection = document.querySelector('.stat-card');
+    if (statsSection) {
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                animateNumbers();
+                observer.disconnect();
+            }
+        });
+        observer.observe(statsSection);
+    }
+
+    // Add hover effects to team member cards
+    document.querySelectorAll('.team-member-card').forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-10px)';
+            const image = this.querySelector('.member-image img');
+            if (image) {
+                image.style.transform = 'scale(1.1)';
+            }
+        });
+
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+            const image = this.querySelector('.member-image img');
+            if (image) {
+                image.style.transform = 'scale(1)';
+            }
+        });
+    });
+
+    // Add hover effects to social links
+    document.querySelectorAll('.social-links a').forEach(link => {
+        link.addEventListener('mouseenter', function() {
+            this.querySelector('i').style.transform = 'scale(1.2) rotate(10deg)';
+        });
+
+        link.addEventListener('mouseleave', function() {
+            this.querySelector('i').style.transform = 'scale(1) rotate(0)';
+        });
+    });
+</script>
+{% endblock %}
+{% endblock %}

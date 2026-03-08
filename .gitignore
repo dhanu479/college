@@ -1,0 +1,16 @@
+venv/
+env/
+run_env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env.bak/
+venv.bak/
+*.db
+*.sqlite3
+.env
+.vscode/
+.idea/
+.DS_Store

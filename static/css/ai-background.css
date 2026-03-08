@@ -1,0 +1,176 @@
+/* AI Video Background Effects */
+.ai-video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -3;
+    background: #000;
+    overflow: hidden;
+}
+
+/* Neural Grid */
+.neural-grid {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(255, 215, 0, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 215, 0, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: gridMove 20s linear infinite;
+    transform-origin: center;
+    perspective: 1000px;
+}
+
+/* Neural Nodes */
+.neural-nodes {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.neural-node {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 215, 0, 0.6);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+}
+
+/* Synaptic Connections */
+.synaptic-lines {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.3;
+}
+
+/* Data Stream Effect */
+.data-stream {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(255, 215, 0, 0.05) 50%,
+        transparent 100%
+    );
+    animation: dataFlow 8s linear infinite;
+}
+
+/* Binary Rain */
+.binary-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    color: rgba(255, 215, 0, 0.15);
+    font-family: monospace;
+    font-size: 14px;
+    line-height: 1;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+/* Neural Pulse */
+.neural-pulse {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle at center,
+        transparent 0%,
+        rgba(255, 215, 0, 0.02) 50%,
+        transparent 100%
+    );
+    animation: pulse 4s ease-in-out infinite;
+}
+
+/* Circuit Patterns */
+.circuit-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(45deg, rgba(255, 215, 0, 0.03) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255, 215, 0, 0.03) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255, 215, 0, 0.03) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255, 215, 0, 0.03) 75%);
+    background-size: 100px 100px;
+    animation: circuitMove 30s linear infinite;
+}
+
+/* Animations */
+@keyframes gridMove {
+    0% {
+        transform: perspective(1000px) rotateX(60deg) translateY(0);
+    }
+    100% {
+        transform: perspective(1000px) rotateX(60deg) translateY(50px);
+    }
+}
+
+@keyframes dataFlow {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(100%);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.2;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(1.2);
+    }
+}
+
+@keyframes circuitMove {
+    0% {
+        transform: translateX(0) translateY(0);
+    }
+    100% {
+        transform: translateX(100px) translateY(100px);
+    }
+}
+
+/* Glow Effects */
+.glow-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle at center,
+        rgba(255, 215, 0, 0.1) 0%,
+        transparent 70%
+    );
+    animation: digitalSweep 10s linear infinite;
+}
+
+@keyframes digitalSweep {
+    0% { transform: translateX(-5%) translateY(-5%); opacity: 0.4; }
+    50% { transform: translateX(5%) translateY(5%); opacity: 0.5; }
+    100% { transform: translateX(-5%) translateY(-5%); opacity: 0.4; }
+}
+
+/* Theme-specific adjustments */
+[data-theme="dark"] .ai-video-background {
+    opacity: 0.8;
+}
+
+[data-theme="light"] .ai-video-background {
+    opacity: 0.3;
+}
+
+[data-theme="cyberpunk"] .ai-video-background {
+    --ai-primary: #00ff00;
+    opacity: 1;
+}

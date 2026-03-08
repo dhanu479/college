@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Results · SecureVote{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-7">
+    <div class="card bg-black border border-warning rounded-4 shadow-sm">
+      <div class="card-body">
+        <h3 class="card-title">Live Results</h3>
+        <ul class="list-group list-group-flush">
+          {% for r in results %}
+            <li class="list-group-item bg-black text-light d-flex justify-content-between align-items-center">
+              <span>{{ r['name'] }} <small class="text-secondary">({{ r['party'] }})</small></span>
+              <span class="badge text-bg-warning">{{ r['vote_count'] }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

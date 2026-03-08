@@ -1,0 +1,208 @@
+/* Login page animations and styles */
+.login-card {
+    position: relative;
+    overflow: hidden;
+    background: rgba(0, 0, 51, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    transform: translateZ(0);
+}
+
+.login-icon-wrapper {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    background: rgba(255, 215, 0, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-icon-wrapper::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid #ffd700;
+    animation: pulse 2s infinite;
+}
+
+/* Login steps */
+.login-steps {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin: 2rem 0;
+}
+
+.login-steps::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: rgba(255, 215, 0, 0.2);
+    z-index: 1;
+}
+
+.step {
+    position: relative;
+    z-index: 2;
+    background: rgb(0, 0, 51);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+}
+
+.step.active {
+    color: #ffd700;
+    transform: scale(1.2);
+}
+
+.step.completed {
+    background: #ffd700;
+    color: rgb(0, 0, 51);
+}
+
+/* Form animations */
+.form-floating {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.form-floating label {
+    transition: all 0.3s ease;
+}
+
+.form-floating input:focus + label,
+.form-floating input:not(:placeholder-shown) + label {
+    transform: translateY(-1.5rem) scale(0.85);
+    color: #ffd700;
+}
+
+.form-control {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #ffd700;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+}
+
+/* Security features */
+.security-feature {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.security-feature:hover {
+    transform: translateY(-5px);
+}
+
+.security-feature i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.security-feature:hover i {
+    transform: scale(1.2);
+    color: #ffd700;
+}
+
+/* Pattern background */
+.login-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.pattern-dot {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 215, 0, 0.2);
+    border-radius: 50%;
+    animation: float 3s infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) translateX(0); }
+    50% { transform: translateY(-10px) translateX(5px); }
+}
+
+/* Password strength indicator */
+.password-strength {
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+}
+
+.password-strength .progress {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 0.25rem;
+}
+
+.password-strength .progress-bar {
+    transition: width 0.3s ease;
+}
+
+/* Submit button animations */
+.btn-submit {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-submit::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+}
+
+.btn-submit:active::after {
+    width: 200px;
+    height: 200px;
+    opacity: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    .login-steps {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .login-steps::before {
+        height: 100%;
+        width: 2px;
+        left: 50%;
+        top: 0;
+    }
+}
