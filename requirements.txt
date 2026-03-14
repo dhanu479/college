@@ -6,3 +6,4 @@ opencv-python==4.8.0.76
 requests==2.32.5
 python-dotenv==1.2.2
 twilio==9.10.3
+gunicorn==21.2.0
