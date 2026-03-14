@@ -7,11 +7,12 @@
       <div class="card-body p-4">
         <div class="text-center mb-4">
           <svg width="60" height="60" class="mb-3 animate__animated animate__pulse animate__infinite">
-            <use href="#face-recognition"/>
+            <use href="#face-recognition" />
           </svg>
           <h2 class="card-title text-warning fw-bold mb-3 text-glow">Face Verification</h2>
-          
-          <div class="alert alert-info bg-dark border-info text-info mb-4 animate__animated animate__fadeIn animate__delay-1s">
+
+          <div
+            class="alert alert-info bg-dark border-info text-info mb-4 animate__animated animate__fadeIn animate__delay-1s">
             <h5 class="text-warning"><i class="fas fa-lightbulb me-2"></i>Instructions</h5>
             <ol class="text-start small mb-0">
               <li>Position your face inside the circle guide</li>
@@ -23,8 +24,10 @@
         </div>
 
         <div class="face-capture-container mb-4 animate__animated animate__fadeIn animate__delay-1s">
-          <div id="camera-container" class="ratio ratio-4x3 border rounded-4 overflow-hidden position-relative scanning">
-            <div class="camera-loading position-absolute w-100 h-100 d-flex align-items-center justify-content-center bg-dark">
+          <div id="camera-container"
+            class="ratio ratio-4x3 border rounded-4 overflow-hidden position-relative scanning">
+            <div
+              class="camera-loading position-absolute w-100 h-100 d-flex align-items-center justify-content-center bg-dark">
               <div class="text-center">
                 <div class="spinner-border text-warning mb-2" role="status">
                   <span class="visually-hidden">Loading camera...</span>
@@ -48,7 +51,7 @@
               </span>
             </div>
           </div>
-          
+
           <div class="camera-hints mt-3">
             <div class="row g-2 text-center">
               <div class="col">
@@ -93,7 +96,7 @@
               <p class="text-muted small">Position<br>Face</p>
             </div>
             <div class="verification-step">
-              <i class="fas fa-shield-check text-warning mb-2"></i>
+              <i class="fas fa-id-badge text-warning mb-2"></i>
               <p class="text-muted small">Verify<br>Identity</p>
             </div>
           </div>
@@ -106,13 +109,13 @@
 <canvas id="canvas" width="640" height="480" style="display:none;"></canvas>
 
 <style>
-.face-capture-container {
+  .face-capture-container {
     position: relative;
     border-radius: 1rem;
     overflow: hidden;
-}
+  }
 
-.face-overlay {
+  .face-overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -122,9 +125,9 @@
     align-items: center;
     justify-content: center;
     pointer-events: none;
-}
+  }
 
-.mirror-video {
+  .mirror-video {
     transform: scaleX(-1);
     -webkit-transform: scaleX(-1);
     -moz-transform: scaleX(-1);
@@ -137,45 +140,45 @@
     top: 0;
     left: 0;
     background: #000;
-}
+  }
 
-.camera-loading {
+  .camera-loading {
     z-index: 2;
     opacity: 0;
     transition: opacity 0.3s ease;
-}
+  }
 
-.camera-loading.active {
+  .camera-loading.active {
     opacity: 1;
-}
+  }
 
-#camera-container {
+  #camera-container {
     background: #000;
     box-shadow: 0 0 20px rgba(255, 193, 7, 0.1);
-}
+  }
 
-#video {
+  #video {
     transition: opacity 0.3s ease;
-}
+  }
 
-#video:not([srcObject]) {
+  #video:not([srcObject]) {
     opacity: 0;
-}
+  }
 
-#video[srcObject] {
+  #video[srcObject] {
     opacity: 1;
-}
+  }
 
-.face-guide {
+  .face-guide {
     width: 300px;
     height: 300px;
     border: 3px solid rgba(255, 193, 7, 0.3);
     border-radius: 50%;
     position: relative;
     animation: guidePulse 2s ease-in-out infinite;
-}
+  }
 
-.face-guide-label {
+  .face-guide-label {
     position: absolute;
     top: -40px;
     left: 50%;
@@ -190,16 +193,24 @@
     align-items: center;
     gap: 8px;
     animation: labelPulse 2s ease-in-out infinite;
-}
+  }
 
-@keyframes labelPulse {
-    0% { opacity: 0.7; }
-    50% { opacity: 1; }
-    100% { opacity: 0.7; }
-}
+  @keyframes labelPulse {
+    0% {
+      opacity: 0.7;
+    }
 
-.face-guide::before,
-.face-guide::after {
+    50% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0.7;
+    }
+  }
+
+  .face-guide::before,
+  .face-guide::after {
     content: '';
     position: absolute;
     top: 50%;
@@ -208,44 +219,60 @@
     height: 320px;
     border: 2px dashed rgba(255, 193, 7, 0.2);
     border-radius: 50%;
-}
+  }
 
-.face-guide::before {
+  .face-guide::before {
     transform: translate(-50%, -50%);
     animation: scanRotate 8s linear infinite;
-}
+  }
 
-.face-guide::after {
+  .face-guide::after {
     transform: translate(-50%, -50%);
     animation: scanRotate 12s linear reverse infinite;
-}
+  }
 
-@keyframes scanRotate {
-    from { transform: translate(-50%, -50%) rotate(0deg); }
-    to { transform: translate(-50%, -50%) rotate(360deg); }
-}
+  @keyframes scanRotate {
+    from {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
 
-@keyframes guidePulse {
-    0% { transform: scale(1); border-color: rgba(255, 193, 7, 0.3); }
-    50% { transform: scale(1.02); border-color: rgba(255, 193, 7, 0.5); }
-    100% { transform: scale(1); border-color: rgba(255, 193, 7, 0.3); }
-}
+    to {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
 
-.verification-step {
+  @keyframes guidePulse {
+    0% {
+      transform: scale(1);
+      border-color: rgba(255, 193, 7, 0.3);
+    }
+
+    50% {
+      transform: scale(1.02);
+      border-color: rgba(255, 193, 7, 0.5);
+    }
+
+    100% {
+      transform: scale(1);
+      border-color: rgba(255, 193, 7, 0.3);
+    }
+  }
+
+  .verification-step {
     opacity: 0.5;
     transition: all 0.3s ease;
-}
+  }
 
-.verification-step.active {
+  .verification-step.active {
     opacity: 1;
     transform: scale(1.1);
-}
+  }
 
-.verification-step i {
+  .verification-step i {
     font-size: 1.5rem;
     display: block;
     margin: 0 auto;
-}
+  }
 </style>
 
 <script src="{{ url_for('static', filename='js/liveness.js') }}"></script>

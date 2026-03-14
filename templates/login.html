@@ -7,9 +7,10 @@
       <div class="card-body p-4">
         <div class="text-center mb-4">
           <svg width="60" height="60" class="mb-3 animate__animated animate__pulse animate__infinite">
-            <use href="#face-recognition"/>
+            <use href="#face-recognition" />
           </svg>
-          <h2 class="card-title text-warning fw-bold mb-3 text-glow animate__animated animate__fadeIn animate__delay-1s">
+          <h2
+            class="card-title text-warning fw-bold mb-3 text-glow animate__animated animate__fadeIn animate__delay-1s">
             Voter Access
           </h2>
           <p class="text-muted animate__animated animate__fadeIn animate__delay-1s">
@@ -19,21 +20,19 @@
 
         <form method="POST" class="needs-validation" novalidate>
           <div class="form-floating mb-4 animate__animated animate__fadeInLeft animate__delay-1s">
-            <input type="text" class="form-control bg-dark text-light border-warning" 
-                   id="username" name="username" required
-                   placeholder="Username">
-            <label for="username" class="text-muted">
-              <i class="fas fa-user me-2"></i>Username
+            <input type="text" class="form-control bg-dark text-light border-warning" id="uucms_number"
+              name="uucms_number" required placeholder="UUCMS Number">
+            <label for="uucms_number" class="text-muted">
+              <i class="fas fa-id-card me-2"></i>UUCMS Number
             </label>
             <div class="invalid-feedback text-warning">
-              Please enter your username
+              Please enter your UUCMS number
             </div>
           </div>
 
           <div class="form-floating mb-4 animate__animated animate__fadeInRight animate__delay-1s">
-            <input type="password" class="form-control bg-dark text-light border-warning" 
-                   id="password" name="password" required
-                   placeholder="Password">
+            <input type="password" class="form-control bg-dark text-light border-warning" id="password" name="password"
+              required placeholder="Password">
             <label for="password" class="text-muted">
               <i class="fas fa-key me-2"></i>Password
             </label>
@@ -47,7 +46,7 @@
               <i class="fas fa-right-to-bracket me-2"></i>
               Login to Vote
             </button>
-            
+
             <a href="{{ url_for('register') }}" class="btn btn-outline-warning btn-lg">
               <i class="fas fa-user-plus me-2"></i>
               New Voter Registration
@@ -62,7 +61,7 @@
               <p class="text-muted small">Biometric<br>Verification</p>
             </div>
             <div class="text-center">
-              <i class="fas fa-shield-halved text-warning mb-2"></i>
+              <i class="fas fa-shield-alt text-warning mb-2"></i>
               <p class="text-muted small">Secure<br>Encryption</p>
             </div>
             <div class="text-center">
@@ -79,40 +78,40 @@
 
 {% block scripts %}
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function () {
     const form = document.querySelector('form');
     const inputs = form.querySelectorAll('input');
 
     // Add floating label animation
     inputs.forEach(input => {
-        input.addEventListener('focus', () => {
-            input.parentElement.classList.add('focused');
-        });
-        input.addEventListener('blur', () => {
-            if (!input.value) {
-                input.parentElement.classList.remove('focused');
-            }
-        });
+      input.addEventListener('focus', () => {
+        input.parentElement.classList.add('focused');
+      });
+      input.addEventListener('blur', () => {
+        if (!input.value) {
+          input.parentElement.classList.remove('focused');
+        }
+      });
     });
 
     // Form validation
-    form.addEventListener('submit', function(event) {
-        if (!form.checkValidity()) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
-        form.classList.add('was-validated');
+    form.addEventListener('submit', function (event) {
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      form.classList.add('was-validated');
     });
 
     // Add hover effect to security features
     document.querySelectorAll('.text-center i').forEach(icon => {
-        icon.parentElement.addEventListener('mouseenter', () => {
-            icon.classList.add('animate__animated', 'animate__heartBeat');
-        });
-        icon.parentElement.addEventListener('mouseleave', () => {
-            icon.classList.remove('animate__animated', 'animate__heartBeat');
-        });
+      icon.parentElement.addEventListener('mouseenter', () => {
+        icon.classList.add('animate__animated', 'animate__heartBeat');
+      });
+      icon.parentElement.addEventListener('mouseleave', () => {
+        icon.classList.remove('animate__animated', 'animate__heartBeat');
+      });
     });
-});
+  });
 </script>
 {% endblock %}

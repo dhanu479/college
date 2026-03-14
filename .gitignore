@@ -1,6 +1,7 @@
 venv/
 env/
 run_env/
+antigravity_venv/
 __pycache__/
 *.pyc
 *.pyo
@@ -14,3 +15,19 @@ venv.bak/
 .vscode/
 .idea/
 .DS_Store
+
+# Uploaded user files (faces & logos) - not for git
+static/faces/
+static/uploads/
+
+# Temp/backup template files
+templates/*.html.new
+templates/*.html.tmp
+
+# Dlib wheel (large binary, not needed in repo)
+*.whl
+
+# Screenshots
+*.jpeg
+*.jpg
+*.png

@@ -5,14 +5,17 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="nav">
-      <ul class="navbar-nav ms-auto gap-2">
+      <ul class="navbar-nav ms-auto gap-4">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="featuresDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="featuresDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
             <i class="fas fa-star me-1"></i>Features
           </a>
           <ul class="dropdown-menu dropdown-menu-dark border-warning" aria-labelledby="featuresDropdown">
-            <li><a class="dropdown-item" href="{{ url_for('features') }}"><i class="fas fa-shield-alt me-2"></i>Key Benefits</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('how_it_works') }}"><i class="fas fa-cogs me-2"></i>How It Works</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('features') }}"><i class="fas fa-shield-alt me-2"></i>Key
+                Benefits</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('how_it_works') }}"><i class="fas fa-cogs me-2"></i>How It
+                Works</a></li>
           </ul>
         </li>
         <li class="nav-item">
@@ -21,44 +24,50 @@
           </a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
             <i class="fas fa-info-circle me-1"></i>About Us
           </a>
           <ul class="dropdown-menu dropdown-menu-dark border-warning" aria-labelledby="aboutDropdown">
-            <li><a class="dropdown-item" href="{{ url_for('about_securevote') }}"><i class="fas fa-shield-alt me-2"></i>About SecureVote</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('our_team') }}"><i class="fas fa-users me-2"></i>Our Team</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('about_securevote') }}"><i
+                  class="fas fa-shield-alt me-2"></i>About SecureVote</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('our_team') }}"><i class="fas fa-users me-2"></i>Our Team</a>
+            </li>
           </ul>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="legalDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="legalDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
             <i class="fas fa-gavel me-1"></i>Legal
           </a>
           <ul class="dropdown-menu dropdown-menu-dark border-warning" aria-labelledby="legalDropdown">
-            <li><a class="dropdown-item" href="{{ url_for('privacy_policy') }}"><i class="fas fa-user-shield me-2"></i>Privacy Policy</a></li>
-            <li><a class="dropdown-item" href="{{ url_for('terms') }}"><i class="fas fa-file-contract me-2"></i>Terms of Service</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('privacy_policy') }}"><i
+                  class="fas fa-user-shield me-2"></i>Privacy Policy</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('terms') }}"><i class="fas fa-file-contract me-2"></i>Terms of
+                Service</a></li>
           </ul>
         </li>
         {% if session.get('admin') %}
-          <li class="nav-item"><a class="nav-link" href="{{ url_for('admin_dashboard') }}">Dashboard</a></li>
-          <li class="nav-item">
-            <a class="nav-link text-danger" href="{{ url_for('logout') }}">
-              <i class="fas fa-sign-out-alt me-1"></i>Logout Admin
-            </a>
-          </li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('admin_dashboard') }}">Dashboard</a></li>
+        <li class="nav-item">
+          <a class="nav-link text-danger" href="{{ url_for('logout') }}">
+            <i class="fas fa-sign-out-alt me-1"></i>Logout Admin
+          </a>
+        </li>
         {% elif session.get('user') %}
-          <li class="nav-item">
-            <span class="nav-link text-warning">
-              <i class="fas fa-user me-1"></i>{{ session.get('username', 'Voter') }}
-            </span>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-danger" href="{{ url_for('logout') }}">
-              <i class="fas fa-sign-out-alt me-1"></i>Logout
-            </a>
-          </li>
+        <li class="nav-item">
+          <span class="nav-link text-warning">
+            <i class="fas fa-user me-1"></i>{{ session.get('username', 'Voter') }}
+          </span>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-danger" href="{{ url_for('logout') }}">
+            <i class="fas fa-sign-out-alt me-1"></i>Logout
+          </a>
+        </li>
         {% else %}
-          <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Voter Login</a></li>
-          <li class="nav-item"><a class="nav-link text-warning" href="{{ url_for('admin_login') }}">Admin</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Voter Login</a></li>
+        <li class="nav-item"><a class="nav-link text-warning" href="{{ url_for('admin_login') }}">Admin</a></li>
         {% endif %}
       </ul>
     </div>

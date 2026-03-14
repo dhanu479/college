@@ -29,10 +29,10 @@
           </div>
           <ul class="list-group list-group-flush mb-4">
             {% for c in candidates %}
-              <li class="list-group-item bg-black text-light d-flex justify-content-between align-items-center">
-                <span>{{ c['name'] }} <small class="text-secondary">({{ c['party'] }})</small></span>
-                <a class="btn btn-sm btn-outline-warning" href="{{ url_for('delete_candidate', cid=c['id']) }}">Delete</a>
-              </li>
+            <li class="list-group-item bg-black text-light d-flex justify-content-between align-items-center">
+              <span>{{ c['name'] }} <small class="text-secondary">({{ c['party'] }})</small></span>
+              <a class="btn btn-sm btn-outline-warning" href="{{ url_for('delete_candidate', cid=c['id']) }}">Delete</a>
+            </li>
             {% endfor %}
           </ul>
 
@@ -62,10 +62,9 @@
             <table class="table table-dark table-hover">
               <thead>
                 <tr>
-                  <th>Voter ID</th>
+                  <th>UUCMS Number</th>
                   <th>Name</th>
                   <th>Phone</th>
-                  <th>Aadhaar</th>
                   <th>Email</th>
                   <th>Status</th>
                   <th>Voted At</th>
@@ -74,16 +73,15 @@
               <tbody>
                 {% for user in users %}
                 <tr>
-                  <td>{{ user.voter_id }}</td>
-                  <td>{{ user.username }}</td>
+                  <td>{{ user.uucms_number }}</td>
+                  <td>{{ user.first_name }} {{ user.last_name }}</td>
                   <td>{{ user.country_code }} {{ user.phone_number }}</td>
                   <td>{{ user.email }}</td>
-                  <td>{{ user.aadhaar[:4] }}...{{ user.aadhaar[-4:] }}</td>
                   <td>
                     {% if user.has_voted %}
-                      <span class="badge bg-success">Voted</span>
+                    <span class="badge bg-success">Voted</span>
                     {% else %}
-                      <span class="badge bg-secondary">Not Voted</span>
+                    <span class="badge bg-secondary">Not Voted</span>
                     {% endif %}
                   </td>
                   <td>{{ user.voted_at if user.voted_at else '-' }}</td>
@@ -110,12 +108,14 @@
       </div>
       <div class="modal-body">
         <p class="text-warning">Are you sure you want to reset all votes? This action cannot be undone.</p>
-        <p class="text-light">Current vote counts will be cleared from all candidates, and all "voted" flags on users will be reset.</p>
-        
+        <p class="text-light">Current vote counts will be cleared from all candidates, and all "voted" flags on users
+          will be reset.</p>
+
         <form method="POST" action="{{ url_for('reset_votes') }}" id="resetVotesForm">
           <div class="mb-3">
             <label for="resetConfirm" class="form-label text-warning">Type RESET to confirm:</label>
-            <input type="text" class="form-control bg-dark text-light border-warning" id="resetConfirm" placeholder="Type RESET here" required autocomplete="off">
+            <input type="text" class="form-control bg-dark text-light border-warning" id="resetConfirm"
+              placeholder="Type RESET here" required autocomplete="off">
           </div>
           <div class="d-grid gap-2">
             <button type="submit" class="btn btn-danger" disabled id="resetSubmitBtn">
@@ -133,22 +133,22 @@
 {% block scripts %}
 {{ super() }}
 <script>
-// Simple script to handle the reset votes functionality
-document.addEventListener('DOMContentLoaded', function() {
+  // Simple script to handle the reset votes functionality
+  document.addEventListener('DOMContentLoaded', function () {
     const resetConfirm = document.getElementById('resetConfirm');
     const resetSubmitBtn = document.getElementById('resetSubmitBtn');
 
     // Enable/disable submit button based on input
-    resetConfirm.addEventListener('keyup', function() {
-        resetSubmitBtn.disabled = this.value !== 'RESET';
+    resetConfirm.addEventListener('keyup', function () {
+      resetSubmitBtn.disabled = this.value !== 'RESET';
     });
 
     // Reset the input when modal is closed
     const resetModal = document.getElementById('resetVotesModal');
-    resetModal.addEventListener('hidden.bs.modal', function() {
-        resetConfirm.value = '';
-        resetSubmitBtn.disabled = true;
+    resetModal.addEventListener('hidden.bs.modal', function () {
+      resetConfirm.value = '';
+      resetSubmitBtn.disabled = true;
     });
-});
+  });
 </script>
 {% endblock scripts %}

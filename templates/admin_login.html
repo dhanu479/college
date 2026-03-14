@@ -7,7 +7,7 @@
       <div class="card-body p-4">
         <div class="text-center mb-4">
           <svg width="60" height="60" class="mb-3 animate__animated animate__pulse animate__infinite">
-            <use href="#security-shield"/>
+            <use href="#security-shield" />
           </svg>
           <h2 class="card-title text-warning fw-bold mb-3 animate__animated animate__fadeIn animate__delay-1s">
             Admin Portal
@@ -19,9 +19,8 @@
 
         <form method="POST" class="needs-validation" novalidate>
           <div class="form-floating mb-4 animate__animated animate__fadeInLeft animate__delay-1s">
-            <input type="text" class="form-control bg-dark text-light border-warning" 
-                   id="username" name="username" required
-                   placeholder="Username">
+            <input type="text" class="form-control bg-dark text-light border-warning" id="username" name="username"
+              required placeholder="Username">
             <label for="username" class="text-muted">
               <i class="fas fa-user-shield me-2"></i>Username
             </label>
@@ -31,9 +30,8 @@
           </div>
 
           <div class="form-floating mb-4 animate__animated animate__fadeInRight animate__delay-1s">
-            <input type="password" class="form-control bg-dark text-light border-warning" 
-                   id="password" name="password" required
-                   placeholder="Password">
+            <input type="password" class="form-control bg-dark text-light border-warning" id="password" name="password"
+              required placeholder="Password">
             <label for="password" class="text-muted">
               <i class="fas fa-lock me-2"></i>Password
             </label>
@@ -54,7 +52,7 @@
 
         <div class="text-center mt-4 animate__animated animate__fadeIn animate__delay-2s">
           <p class="text-muted small">
-            <i class="fas fa-shield-halved text-warning me-2"></i>
+            <i class="fas fa-shield-alt text-warning me-2"></i>
             Secured with advanced encryption
           </p>
         </div>
@@ -66,46 +64,46 @@
 
 {% block scripts %}
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function () {
     const form = document.querySelector('form');
     const inputs = form.querySelectorAll('input');
 
     // Add floating label animation
     inputs.forEach(input => {
-        input.addEventListener('focus', () => {
-            input.parentElement.classList.add('focused');
-        });
-        input.addEventListener('blur', () => {
-            if (!input.value) {
-                input.parentElement.classList.remove('focused');
-            }
-        });
+      input.addEventListener('focus', () => {
+        input.parentElement.classList.add('focused');
+      });
+      input.addEventListener('blur', () => {
+        if (!input.value) {
+          input.parentElement.classList.remove('focused');
+        }
+      });
     });
 
     // Form validation
-    form.addEventListener('submit', function(event) {
-        if (!form.checkValidity()) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
-        form.classList.add('was-validated');
+    form.addEventListener('submit', function (event) {
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      form.classList.add('was-validated');
     });
 
     // Add ripple effect to button
     const button = form.querySelector('button');
-    button.addEventListener('click', function(e) {
-        const rect = button.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
+    button.addEventListener('click', function (e) {
+      const rect = button.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
 
-        const ripple = document.createElement('span');
-        ripple.style.left = `${x}px`;
-        ripple.style.top = `${y}px`;
-        ripple.className = 'ripple';
+      const ripple = document.createElement('span');
+      ripple.style.left = `${x}px`;
+      ripple.style.top = `${y}px`;
+      ripple.className = 'ripple';
 
-        button.appendChild(ripple);
-        setTimeout(() => ripple.remove(), 1000);
+      button.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 1000);
     });
-});
+  });
 </script>
 {% endblock %}

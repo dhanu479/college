@@ -3,14 +3,19 @@ import os
 import uuid
 import sqlite3
 import traceback
-from datetime import datetime
-from datetime import timedelta, datetime
+from datetime import datetime, timedelta
 
 import random
 import smtplib
 import ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+
+import requests
+from dotenv import load_dotenv
+from twilio.rest import Client
+
+load_dotenv()
 
 import numpy as np
 import cv2
@@ -20,16 +25,17 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 
 # --------------------- Email Config ---------------------
-# These should ideally be in env variables
+# Set inside .env file in root directory!
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 465
-SENDER_EMAIL = "securevote.alerts@gmail.com"  # Replace with actual email
-SENDER_PASSWORD = "vkyu lkjp qwer tyui"      # Replace with app-specific password
 
 def send_email(receiver_email, subject, body_html):
-    # Check if credentials are placeholders
-    if "your-email" in SENDER_EMAIL or "your-password" in SENDER_PASSWORD:
-        print(f"SKIPPING EMAIL (No credentials): To {receiver_email}")
+    # Fetch from .env
+    SENDER_EMAIL = os.getenv('SENDER_EMAIL', 'securevote.alerts@gmail.com')
+    SENDER_PASSWORD = os.getenv('SENDER_PASSWORD', '')
+
+    if not SENDER_PASSWORD or "your_16_digit_app_password_here" in SENDER_PASSWORD:
+        print(f"SKIPPING EMAIL (Unconfigured): Add a valid Google App Password to .env to send to {receiver_email}")
         return False
 
     try:
@@ -58,9 +64,82 @@ def send_email(receiver_email, subject, body_html):
         print(f"Failed to prepare email: {e}")
         return False
 
+# --------------------- Real SMS Setup ---------------------
+TWILIO_ACCOUNT_SID = os.getenv('TWILIO_ACCOUNT_SID')
+TWILIO_AUTH_TOKEN = os.getenv('TWILIO_AUTH_TOKEN')
+TWILIO_PHONE_NUMBER = os.getenv('TWILIO_PHONE_NUMBER')
+FAST2SMS_API_KEY = os.getenv('FAST2SMS_API_KEY')
+MSG91_AUTH_KEY = os.getenv('MSG91_AUTH_KEY')
+MSG91_WIDGET_ID = os.getenv('MSG91_WIDGET_ID')
+
+def send_real_sms(to_number, otp_code):
+    success = False
+    
+    # Clean phone number (remove +, spaces, dashes)
+    clean_no = to_number.replace("+", "").replace(" ", "").replace("-", "")
+    
+    # 1. Try MSG91 (Best for reliability and Widget support)
+    if MSG91_AUTH_KEY and "your_" not in MSG91_AUTH_KEY:
+        url = "https://control.msg91.com/api/v5/otp"
+        querystring = {
+            "mobile": clean_no,
+            "authkey": MSG91_AUTH_KEY,
+            "otp": otp_code
+        }
+        # Only add widget_id if it's set
+        if MSG91_WIDGET_ID:
+            querystring["widget_id"] = MSG91_WIDGET_ID
+        headers = {'Content-Type': "application/json"}
+        try:
+            response = requests.get(url, params=querystring, headers=headers)
+            res_data = response.json()
+            print("MSG91 Response:", res_data)
+            if res_data.get('type') == 'success':
+                return True
+            else:
+                print("MSG91 failed:", res_data)
+        except Exception as e:
+            print("MSG91 Error:", e)
+
+    # 2. Try Fast2SMS (Backup for India)
+    if FAST2SMS_API_KEY and "your_fast2sms" not in FAST2SMS_API_KEY:
+        # Fast2SMS expects 10 digits for India
+        india_no = clean_no[-10:] if len(clean_no) >= 10 else clean_no
+        url = "https://www.fast2sms.com/dev/bulkV2"
+        querystring = {"authorization":FAST2SMS_API_KEY, "variables_values":otp_code, "route":"otp", "numbers":india_no}
+        headers = {'cache-control': "no-cache"}
+        try:
+            response = requests.request("GET", url, headers=headers, params=querystring)
+            print("Fast2SMS Response:", response.text)
+            res_json = response.json()
+            if res_json.get('return') is True or res_json.get('status_code') == 200:
+                return True
+            else:
+                print("Fast2SMS failed:", res_json)
+        except Exception as e:
+            print("Fast2SMS Error:", e)
+
+    # 3. Fallback to Twilio
+    if TWILIO_ACCOUNT_SID and TWILIO_AUTH_TOKEN and TWILIO_PHONE_NUMBER:
+        if "your_account_sid" not in TWILIO_ACCOUNT_SID:
+            try:
+                client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
+                message = client.messages.create(
+                    body=f"Your SecureVote verification OTP is: {otp_code}. Do not share this API code with anyone.",
+                    from_=TWILIO_PHONE_NUMBER,
+                    to=to_number
+                )
+                print("Twilio sent SMS. SID:", message.sid)
+                return True
+            except Exception as e:
+                print("Twilio SMS Error:", e)
+    
+    return False
+
 # --------------------- App Config ---------------------
 app = Flask(__name__)
-app.secret_key = os.urandom(24)
+# Use a fixed secret key from env, or a stable fallback (do NOT use os.urandom — kills sessions on restart)
+app.secret_key = os.getenv('SECRET_KEY', 'securevote-stable-secret-key-2026-change-in-production')
 app.permanent_session_lifetime = timedelta(minutes=30)
 
 BASE_DIR = os.path.dirname(__file__)
@@ -166,11 +245,10 @@ def color_texture_checks(rgb_img):
     }
 
 def liveness_eval(base_img):
-    # Ensure single face in all
-    for img in (base_img):
-        enc, count = single_face_encoding(img)
-        if enc is None:
-            return False, "Make sure only one face is visible.", {}
+    # Ensure single face
+    enc, count = single_face_encoding(base_img)
+    if enc is None:
+        return False, "Make sure only one face is visible.", {}
 
     # Landmarks
     base_lm = landmarks_68(base_img)
@@ -224,15 +302,16 @@ def help():
 def register():
     if request.method == 'POST':
         try:
-            username = request.form.get('username','').strip()
+            first_name = request.form.get('first_name', '').strip()
+            last_name = request.form.get('last_name', '').strip()
             password = request.form.get('password','')
             email = request.form.get('email','').strip()
-            voter_id = request.form.get('voter_id','').strip()
-            aadhaar = request.form.get('aadhaar','').strip()
+            uucms_number = request.form.get('uucms_number','').strip()
+            otp_method = request.form.get('otp_method', 'email')
             dob_str  = request.form.get('dob','').strip()
             face_img = request.files.get('face_image')
 
-            if not all([username, password, email, voter_id, aadhaar, dob_str, face_img]):
+            if not all([first_name, last_name, password, email, uucms_number, dob_str, face_img]):
                 flash("All fields are required.", "danger")
                 return render_template('register.html', datetime=datetime)
 
@@ -248,6 +327,11 @@ def register():
                 flash("You must be at least 18 years old to vote.", "danger")
                 return render_template('register.html', datetime=datetime)
 
+            # Basic UUCMS Number Validation (adjust regex if you have a strict format)
+            if not len(uucms_number) > 3:
+                flash("Please enter a valid UUCMS Number.", "danger")
+                return render_template('register.html', datetime=datetime)
+
             # Validate phone number
             phone_number = request.form.get('phone_number', '').strip()
             country_code = request.form.get('country_code', '').strip()
@@ -255,18 +339,30 @@ def register():
                 flash("Please enter a valid 10-digit phone number.", "danger")
                 return render_template('register.html', datetime=datetime)
 
-            # Validate Aadhaar
-            if not aadhaar.isdigit() or len(aadhaar) != 12:
-                flash("Please enter a valid 12-digit Aadhaar number.", "danger")
-                return render_template('register.html', datetime=datetime)
 
-            # Check if username or voter_id already exists
+
+            # Check for uniqueness of all fields
             conn = get_db()
-            existing = conn.execute("SELECT id FROM users WHERE username = ? OR voter_id = ?", (username, voter_id)).fetchone()
-            conn.close()
+            existing = conn.execute("""
+                SELECT uucms_number, email, phone_number 
+                FROM users 
+                WHERE uucms_number = ? OR email = ? OR phone_number = ?
+            """, (uucms_number, email, phone_number)).fetchall()
+            
             if existing:
-                flash("Username or Voter ID already exists.", "danger")
+                for row in existing:
+                    if row['uucms_number'] == uucms_number:
+                        flash("UUCMS Number already exists.", "danger")
+                    elif row['email'] == email:
+                        flash("Email address is already registered.", "danger")
+                    elif row['phone_number'] == phone_number:
+                        flash("Phone number is already registered.", "danger")
+                conn.close()
                 return render_template('register.html', datetime=datetime)
+            
+            # Retrieve all existing face encodings for face duplication check
+            existing_encodings = conn.execute("SELECT face_encoding FROM users").fetchall()
+            conn.close()
 
             # Process face
             rgb = process_image_from_filestorage(face_img)
@@ -278,6 +374,15 @@ def register():
             if enc is None:
                 flash("Exactly one clear face must be visible.", "danger")
                 return render_template('register.html', datetime=datetime)
+
+            # Check if face already exists
+            if existing_encodings:
+                known_encodings = [np.frombuffer(row['face_encoding'], dtype=np.float64) for row in existing_encodings]
+                # Compare the current face with all known faces
+                matches = face_recognition.compare_faces(known_encodings, enc, tolerance=0.45)
+                if any(matches):
+                    flash("This face is already registered to another user.", "danger")
+                    return render_template('register.html', datetime=datetime)
 
             # Save face image permanently for now (can clean up later if OTP fails)
             filename = secure_filename(f"{uuid.uuid4().hex}.jpg")
@@ -302,14 +407,26 @@ def register():
             </body>
             </html>
             """
-            send_email(email, "SecureVote - Your Verification Code", otp_html)
+            # Send OTP based on user choice
+            if otp_method == 'email':
+                send_email(email, "SecureVote - Your Verification Code", otp_html)
+                msg_target = email
+            else:
+                # Real SMS integration
+                full_number = f"{country_code}{phone_number}"
+                sms_sent = send_real_sms(full_number, otp)
+                
+                if not sms_sent:
+                    flash("SMS API not configured! Could not send real SMS. Setup your .env file in the root directory.", "warning")
+                    
+                msg_target = full_number
 
             session['reg_data'] = {
-                'username': username,
+                'first_name': first_name,
+                'last_name': last_name,
                 'password': generate_password_hash(password),
                 'email': email,
-                'voter_id': voter_id,
-                'aadhaar': aadhaar,
+                'uucms_number': uucms_number,
                 'phone_number': phone_number,
                 'country_code': country_code,
                 'dob': dob_str,
@@ -320,7 +437,7 @@ def register():
             session.permanent = True # Ensure session is saved reliably
             
             # SIMULATION: Show OTP in flash for user
-            flash(f"A 4-digit OTP has been sent to {country_code}{phone_number} (and your email).", "info")
+            flash(f"A 4-digit OTP has been sent to {msg_target}.", "info")
             # For local testing convenience:
             flash(f"DEBUG: Your OTP is {otp}", "warning") 
 
@@ -346,11 +463,11 @@ def verify_otp():
             try:
                 conn = get_db()
                 conn.execute("""
-                    INSERT INTO users (username, password, email, voter_id, aadhaar, phone_number, country_code, 
+                    INSERT INTO users (first_name, last_name, password, email, uucms_number, phone_number, country_code, 
                                      dob, face_image, face_encoding)
                     VALUES (?,?,?,?,?,?,?,?,?,?)
-                """, (data['username'], data['password'], data['email'], data['voter_id'], 
-                      data['aadhaar'], data['phone_number'], data['country_code'], data['dob'], 
+                """, (data['first_name'], data['last_name'], data['password'], data['email'], 
+                      data['uucms_number'], data['phone_number'], data['country_code'], data['dob'], 
                       data['face_image'], bytes.fromhex(data['face_encoding'])))
                 conn.commit()
                 conn.close()
@@ -360,12 +477,12 @@ def verify_otp():
                 <html>
                 <body style="font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px;">
                     <div style="max-width: 600px; margin: auto; background: white; padding: 30px; border-radius: 10px; border-top: 5px solid #ffc107;">
-                        <h2 style="color: #333;">Welcome to SecureVote, {data['username']}!</h2>
+                        <h2 style="color: #333;">Welcome to SecureVote, {data['first_name']} {data['last_name']}!</h2>
                         <p style="color: #555; line-height: 1.6;">Congratulations! Your registration has been successfully processed.</p>
                         <p style="color: #555; line-height: 1.6;">You can now securely cast your vote in upcoming elections using our advanced biometric system.</p>
                         <div style="background: #fff8e1; padding: 15px; border-radius: 5px; margin: 20px 0;">
                             <strong style="color: #333;">Registered Details:</strong><br>
-                            <span style="color: #666;">Voter ID:</span> {data['voter_id']}<br>
+                            <span style="color: #666;">UUCMS Number:</span> {data['uucms_number']}<br>
                             <span style="color: #666;">Email:</span> {data['email']}<br>
                             <span style="color: #666;">Phone:</span> {data['country_code']} {data['phone_number']}
                         </div>
@@ -385,7 +502,7 @@ def verify_otp():
                 flash("Verification successful! You can now log in.", "success")
                 return redirect(url_for('login'))
             except sqlite3.IntegrityError:
-                flash("Username or Voter ID already exists.", "danger")
+                flash("UUCMS Number or Email already exists.", "danger")
                 return redirect(url_for('register'))
             except Exception as e:
                 traceback.print_exc()
@@ -399,17 +516,17 @@ def verify_otp():
 @app.route('/login', methods=['GET','POST'])
 def login():
     if request.method == 'POST':
-        username = request.form.get('username','').strip()
+        uucms_number = request.form.get('uucms_number','').strip()
         password = request.form.get('password','')
 
         conn = get_db()
-        user = conn.execute("SELECT * FROM users WHERE username = ?", (username,)).fetchone()
+        user = conn.execute("SELECT * FROM users WHERE uucms_number = ?", (uucms_number,)).fetchone()
         conn.close()
 
         if user and check_password_hash(user['password'], password):
             session.clear()
             session['user_id'] = user['id']
-            session['username'] = user['username']
+            session['username'] = f"{user['first_name']} {user['last_name']}"
             session.permanent = True
             return redirect(url_for('face_verify'))
         flash("Invalid credentials.", "danger")
@@ -432,10 +549,6 @@ def logout():
     else:
         flash("You have been logged out.", "info")
     
-    return redirect(url_for('index'))
-    
-    # Always clear the entire session for security
-    session.clear()
     return redirect(url_for('index'))
 
 @app.route('/face-verify', methods=['GET','POST'])
@@ -579,7 +692,7 @@ def admin_dashboard():
     
     # Get user details for the table
     users = conn.execute("""
-        SELECT username, email, voter_id, aadhaar, phone_number, country_code,
+        SELECT first_name, last_name, email, uucms_number, phone_number, country_code,
                has_voted, voted_at FROM users ORDER BY created_at DESC
     """).fetchall()
     

@@ -7,10 +7,11 @@ DROP TABLE IF EXISTS admins;
 -- Users table
 CREATE TABLE users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    username TEXT UNIQUE NOT NULL,
+    first_name TEXT NOT NULL,
+    last_name TEXT NOT NULL,
     password TEXT NOT NULL,
-    voter_id TEXT UNIQUE NOT NULL,
-    aadhaar TEXT NOT NULL,
+    email TEXT NOT NULL UNIQUE,
+    uucms_number TEXT UNIQUE NOT NULL,
     phone_number TEXT NOT NULL,
     country_code TEXT NOT NULL,
     dob TEXT NOT NULL,
